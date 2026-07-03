@@ -1,0 +1,152 @@
+/* PARA DISPOSITIVOS MÓVILES */
+/* Se aplica en pantallas de hasta 768px */
+
+html,
+body {
+    padding-top: 50px;
+}
+
+/* BARRA SUPERIOR */
+.top-bar {
+    padding: 1rem 1rem;
+}
+
+.logo {
+    font-size: 1rem;
+}
+
+/* BARRA INFERIOR */
+.footer {
+    padding: 2rem 0;
+    margin-top: 50px;
+}
+
+.footer-text {
+    font-size: 0.5rem;
+}
+
+.footer-icon {
+    height: 2rem;
+}
+
+/* BOTÓN DE MENÚ */
+.menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 30px;
+}
+
+.menu-toggle img {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.5s ease;
+}
+
+.nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-left: auto;
+}
+
+.nav-links.open {
+    display: flex;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.nav-links a {
+    font-size: 1rem;
+}
+
+/* CUERPO */
+/* Contenedor centrado */
+body>main {
+    width: 90%;
+}
+
+/* Títulos */
+.section-title-bg {
+    font-size: 3rem;
+    top: -1rem;
+    letter-spacing: 10px;
+}
+
+.post-section-title {
+    font-size: 1.5rem;
+    padding-bottom: 30px;
+}
+
+/* Tarjetas */
+.post-header {
+  margin-bottom: 1rem;
+}
+
+.post-number {
+    font-size: 3rem;
+}
+
+.post-number-bg {
+    top: -1.5rem;
+    font-size: 6rem;
+}
+
+.post-title {
+    font-size: 1.25rem;
+}
+
+.post-date {
+    font-size: 0.75rem;
+}
+
+.post-tags {
+    font-size: 0.75rem;
+}
+
+.post-excerpt {
+    font-size: 0.75rem;
+}
+
+/* POSTS */
+.post-body {
+    padding-top: 20px;
+    max-width: 90%;
+}
+
+.post-content blockquote {
+  width: 85%;
+}
+
+/* Imágenes */
+.post-content img {
+  width: 90%;
+}
+
+/* VOLVER AL INICIO */
+.back-link {
+    margin-bottom: 30px;
+    font-size: 0.75rem;
+}
+
+.rect-line {
+  margin: 20px 0%;
+}
+
+/* BARRA DE PROGRESO */
+.progress-bar-container {
+  top: 69px;
+}
