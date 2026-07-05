@@ -1,0 +1,26 @@
+[
+  {
+    "number": "000",
+    "title": {
+      "es": "",
+      "eo": ""
+    },
+    "file": {
+      "es": "000_es.md",
+      "eo": "000_eo.md"
+    },
+    "type": {
+      "es": "Idea",
+      "eo": "Ideo"
+    },
+    "author": {
+      "es": "",
+      "eo": ""
+    },
+    "date": "2025-07-13",
+    "excerpt": {
+      "es": "",
+      "eo": ""
+    }
+  }
+]

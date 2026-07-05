@@ -1,0 +1,345 @@
+/* VARIABLES */
+:root {
+  --background-color: #f4f1ec;
+  --base-color: rgba(220, 211, 197, 0.50);
+  --primary-color: #222831;
+  --secondary-color: #393E46;
+  --tertiary-color: #948979;
+  --quaternary-color: #DFD0B8;
+  --progress-color: #222831;
+  --progress-complete: #006400;
+}
+
+/* COLORES MODO OSCURO */
+body.dark {
+  --background-color: #0c0e11;
+  --base-color: rgba(220, 211, 197, 0.1);
+  --primary-color: #f4f1ec;
+  --secondary-color: #DFD0B8;
+  --tertiary-color: #948979;
+  --quaternary-color: #DFD0B8;
+  --progress-color: #f4f1ec;
+  --progress-complete: #00aa00;
+}
+
+.post-body {
+  max-width: 60%;
+  margin: 0px auto 0px auto;
+  color: var(--primary-color);
+}
+
+.post-header {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.post-number-bg {
+  position: absolute;
+  top: -4rem;
+  font-family: 'Hubot Sans', sans-serif;
+  font-size: 10rem;
+  font-weight: 800;
+  letter-spacing: 15px;
+  color: var(--primary-color);
+  opacity: 0.1;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+
+.post-title {
+  position: relative;
+  font-family: 'Hubot Sans', sans-serif;
+  line-height: 1;
+  font-weight: 700;
+  font-size: 3rem;
+  letter-spacing: 1px;
+  z-index: 1;
+}
+
+.post-meta {
+  font-size: 1rem;
+  color: var(--secondary-color);
+  opacity: 0.7;
+  margin-top: 2rem;
+  text-transform: uppercase;
+}
+
+.post-content {
+  text-align: justify;
+  font-family: "Vollkorn", serif;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.post-content p {
+  margin-bottom: 1rem;
+}
+
+.rect-line {
+  width: 75%;
+  margin: 50px 0%;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  opacity: 0.75;
+}
+
+/* VOLVER AL INICIO */
+.back-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 100px;
+  font-family: 'Hubot Sans', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.back-link img {
+  height: 1rem;
+  width: auto;
+}
+
+.back-link a {
+  text-decoration: none;
+  color: var(--primary-color);
+  position: relative;
+}
+
+.back-link a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary-color);
+  bottom: -2px;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease-in-out;
+}
+
+.back-link a:hover::after {
+  transform: scaleX(1);
+}
+
+.post-signature {
+  text-align: right;
+  font-size: 1rem;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  color: var(--secondary-color);
+  font-family: "Vollkorn", serif;
+}
+
+/* CONTROLES DE NAVEGACIÓN */
+.post-nav-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 3px solid #444;
+  font-family: 'Hubot Sans', sans-serif;
+}
+
+.post-nav {
+  text-decoration: none;
+  color: var(--secondary-color);
+  font-weight: 500;
+  text-transform: uppercase;
+  position: relative;
+  font-size: 0.75rem;
+}
+
+/* Animación underline */
+.post-nav::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: var(--secondary-color);
+  opacity: 0.75;
+  bottom: -2px;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease-in-out;
+}
+
+.post-nav:hover::after {
+  transform: scaleX(1);
+}
+
+/* BARRA DE PROGRESO */
+.progress-bar-container {
+  position: fixed;
+  top: 67px;
+  /* altura de .top-bar (~1rem padding + font) */
+  left: 0;
+  right: 0;
+  height: 6px;
+  z-index: 1000;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: var(--primary-color);
+  transition: width 0.4s ease, background-color 0.4s ease;
+}
+
+/* ESTILOS DEL CONTENIDO */
+/* Títulos */
+.post-content h1 {
+  font-family: 'Hubot Sans', sans-serif;
+  letter-spacing: 1px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.post-content h2 {
+  font-family: 'Hubot Sans', sans-serif;
+  letter-spacing: 1px;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.post-content h3 {
+  font-family: 'Hubot Sans', sans-serif;
+  letter-spacing: 1px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.post-content h4 {
+  font-family: 'Hubot Sans', sans-serif;
+  letter-spacing: 1px;
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+/* Énfasis */
+.post-content strong {
+  font-family: 'Hubot Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.post-content em {
+  font-style: italic;
+}
+
+/* Código en línea */
+.post-content code {
+  background-color: var(--primary-color) !important;
+  color: var(--background-color);
+  font-family: monospace;
+  font-size: 0.95rem;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+/* Enlaces */
+.post-content a {
+  text-decoration: none;
+  color: var(--tertiary-color);
+  border-bottom: 1px solid var(--tertiary-color);
+}
+
+.post-content a:hover {
+  color: var(--secondary-color);
+  border-bottom-style: solid;
+}
+
+/* Citas */
+.post-content blockquote {
+  width: 75%;
+  border-left: 4px solid var(--tertiary-color);
+  padding-left: 1rem;
+  color: var(--tertiary-color);
+  margin: 50px auto;
+}
+
+.post-content blockquote footer {
+  display: block;
+  text-align: right;
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: var(--tertiary-color);
+}
+
+
+/* Bloques de código */
+.post-content pre {
+  background-color: var(--primary-color) !important;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.post-content pre code {
+  font-family: 'Courier New', monospace;
+  color: var(--background-color);
+  font-size: 0.95rem;
+}
+
+/* Listas */
+.post-content ul,
+.post-content ol {
+  padding-left: 2rem;
+  margin-bottom: 1rem;
+}
+
+.post-content li {
+  margin-bottom: 0.5rem;
+}
+
+/* Imágenes */
+.post-content img {
+  display: block;
+  margin: 2rem auto 0.5rem auto;
+  width: 75%;
+  border-radius: 6px;
+}
+
+/* Tablas */
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.post-content th,
+.post-content td {
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  text-align: left;
+  background-color: #fff;
+}
+
+.post-content th {
+  background-color: #eee;
+  font-weight: 600;
+}
+
+/* Epígrafe */
+.post-epigraph {
+  margin: auto;
+  width: 75%;
+  text-align: center;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  color: var(--tertiary-color);
+  font-family: "Vollkorn", serif;
+}

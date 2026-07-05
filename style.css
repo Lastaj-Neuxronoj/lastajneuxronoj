@@ -1,0 +1,172 @@
+/* VARIABLES */
+:root {
+  --background-color: #f4f1ec;
+  --base-color: rgba(220, 211, 197, 0.50);
+  --primary-color: #222831;
+  --secondary-color: #393E46;
+  --tertiary-color: #948979;
+  --quaternary-color: #DFD0B8;
+}
+
+/* COLORES MODO OSCURO */
+body.dark, html.dark {
+  --background-color: #0c0e11;
+  --base-color: rgba(34, 40, 49, 0.50);
+  --primary-color: #f4f1ec;
+  --secondary-color: #DFD0B8;
+  --tertiary-color: #948979;
+  --quaternary-color: #DFD0B8;
+}
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: var(--background-color);
+  color: #222;
+  width: 100%;
+  overflow-x: hidden;
+  padding-top: 75px;
+}
+
+/* Contenedor centrado */
+body>main {
+  width: 60%;
+  margin: 0 auto;
+}
+
+/* Lista de posts */
+.post-list {
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+#post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.post-section-header {
+  position: relative;
+}
+
+.section-title-bg {
+  position: absolute;
+  top: -3.5rem;
+  left: 0;
+  font-size: 6rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  opacity: 0.1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  font-family: 'Hubot Sans', sans-serif;
+  letter-spacing: 15px;
+  white-space: nowrap;
+}
+
+.post-section-title {
+  position: relative;
+  z-index: 1;
+  font-size: 2rem;
+  font-family: 'Hubot Sans', sans-serif;
+  letter-spacing: 1px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  padding-bottom: 50px;
+  border-bottom: 3px solid var(--primary-color);
+}
+
+/* Tarjeta */
+.post-card {
+  display: flex;
+  border: 2px solid var(--primary-color);
+  padding: 1.5rem;
+  background-color: var(--background-color);
+  transition: background-color 0.3s;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateX(20px);
+  animation: postEnter 0.4s ease-out forwards;
+}
+
+.post-card:hover {
+  background-color: var(--base-color);
+}
+
+@keyframes postEnter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.post-number {
+  font-family: 'Hubot Sans', sans-serif;
+  font-weight: 800;
+  font-size: 4rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  width: auto;
+  text-align: left;
+  align-self: center;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 7px;
+  margin: 0;
+  margin-right: 20px;
+  padding: 0;
+  line-height: 1;
+}
+
+.post-content {
+  flex: 1;
+  font-family: "Vollkorn", serif;
+  text-align: justify;
+}
+
+.post-date {
+  font-family: 'Hubot Sans', sans-serif;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  color: var(--secondary-color);
+  margin-bottom: 0.3rem;
+}
+
+.post-title {
+  font-family: 'Hubot Sans', sans-serif;
+  text-align: start;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+  color: var(--primary-color);
+}
+
+.post-tags {
+  font-family: 'Hubot Sans', sans-serif;
+  font-weight: 300;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  color: var(--secondary-color);
+  opacity: 0.7;
+  margin-bottom: 0.5rem;
+}
+
+.post-excerpt {
+  font-size: 1rem;
+  color: var(--primary-color);
+  line-height: 1.5;
+}

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RETEJO | Sobre mí</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./post.css" />
+    <link rel="stylesheet" href="./header_footer.css" />
+    <link rel="stylesheet" href="./mobile.css" media="(max-width: 768px)">
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hubot+Sans:ital,wght@0,200..900;1,200..900&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Barra superior -->
+    <header class="top-bar">
+        <div class="logo" id="logo-text">retejo</div>
+
+        <nav class="nav-links" id="nav-links">
+            <a id="nav-home" href="./index.html">[ Inicio ]</a>
+            <a id="nav-about" href="./about.html">[ Sobre mí ]</a>
+            <button class="lang-switch" id="lang-switch">[ES]</button>
+            <button class="theme-switch" id="theme-switch">
+                <img id="theme-icon" src="./svg/sun_w.svg" alt="Cambiar tema" />
+            </button>
+        </nav>
+
+        <!-- Botón de menú hamburguesa (visible solo en móvil) -->
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+            <img src="./svg/menu_b.svg" alt="Abrir menú" id="menu-icon">
+        </button>
+    </header>
+
+    <main class="post-body">
+        <div class="back-link">
+            <img id="back-icon" src="./svg/left_arrow.svg" alt="Flecha hacia atrás">
+            <a href="./index.html">VOLVER AL INICIO</a>
+        </div>
+
+        <div class="post-section-header">
+            <div class="section-title-bg" id="about-section-bg">ABOUT_ME</div>
+            <h2 class="post-section-title" id="about-section-title">> SOBRE_MI</h2>
+        </div>
+
+        <div class="post-content" id="about-content" style="margin-top: 50px;">
+            <!-- Aquí se cargará el contenido desde Markdown -->
+        </div>
+
+        <div class="post-signature">—Gnoseomático</div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-text">GNOSEOMÁTICO — 2025</div>
+        <div class="footer-icons">
+            <img src="./svg/notbyai-es.svg" alt="Creado por un humano, no por IA" class="footer-icon" />
+            <img src="./svg/notbyai-en.svg" alt="Produced by human, not by AI" class="footer-icon" />
+            <img src="./svg/notbyai-eo.svg" alt="Produkita de homo, ne de AI" class="footer-icon" />
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const lang = localStorage.getItem("lang") || "es";
+
+            fetch('./translations.json')
+                .then(res => res.json())
+                .then(translations => {
+                    const t = translations[lang];
+                    if (!t) return;
+
+                    // Aplica textos estáticos traducidos
+                    const applyText = (id, value) => {
+                        const el = document.getElementById(id);
+                        if (el) el.textContent = value;
+                    };
+
+                    applyText("logo-text", t.logo_text);
+                    applyText("nav-home", t.nav_home);
+                    applyText("nav-about", t.nav_about);
+                    applyText("lang-switch", t.lang_code);
+                    applyText("about-section-bg", t.about_section_bg);
+                    applyText("about-section-title", t.about_section_title);
+                    applyText("footer-text", t.footer_text);
+
+                    // Carga el markdown correspondiente
+                    const mdFile = `./posts/about_${lang}.md`;
+
+                    fetch(mdFile)
+                        .then(res => {
+                            if (!res.ok) throw new Error("Markdown no encontrado");
+                            return res.text();
+                        })
+                        .then(md => {
+                            const html = marked.parse(md);
+                            document.getElementById("about-content").innerHTML = html;
+                        })
+                        .catch(err => {
+                            document.getElementById("about-content").innerHTML = "<p>There's no translation available.</p>";
+                            console.error(err);
+                        });
+                });
+
+            // Cambiar idioma al click
+            document.getElementById("lang-switch").addEventListener("click", () => {
+                const current = localStorage.getItem("lang") || "es";
+                const next = current === "es" ? "eo" : "es";
+                localStorage.setItem("lang", next);
+                location.reload();
+            });
+        });
+
+        // BOTÓN DE MENÚ
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+        const menuIcon = document.getElementById('menu-icon');
+
+        let menuOpen = false;
+
+        // Función para actualizar el ícono según tema y estado
+        const updateMenuIcon = () => {
+            const isDark = document.body.classList.contains('dark');
+            if (menuOpen) {
+                menuIcon.src = isDark ? './svg/close_menu_w.svg' : './svg/close_menu_b.svg';
+            } else {
+                menuIcon.src = isDark ? './svg/menu_w.svg' : './svg/menu_b.svg';
+            }
+        };
+
+        // Al cargar la página, actualizar ícono por si ya hay tema activo
+        document.addEventListener("DOMContentLoaded", () => {
+            updateMenuIcon();
+        });
+
+        // Evento de hacer click en el menú
+        menuToggle.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+
+            menuToggle.setAttribute('aria-label', menuOpen ? 'Cerrar menú' : 'Abrir menú');
+            navLinks.classList.toggle('open');
+            updateMenuIcon();
+        });
+
+
+        // MODO OSCURO
+        document.addEventListener("DOMContentLoaded", () => {
+            const theme = localStorage.getItem("theme") || "light";
+            const body = document.body;
+            const html = document.documentElement;
+            const icon = document.getElementById("theme-icon");
+
+            const applyTheme = (theme) => {
+                if (theme === "dark") {
+                    body.classList.add("dark");
+                    html.classList.add("dark");
+                    icon.src = "./svg/moon_b.svg"; // Ícono sol negro
+                    icon.alt = "Modo claro";
+                } else {
+                    body.classList.remove("dark");
+                    html.classList.remove("dark");
+                    icon.src = "./svg/sun_w.svg"; // Ícono luna negro
+                    icon.alt = "Modo oscuro";
+                }
+
+                const backIcon = document.getElementById("back-icon");
+                if (backIcon) {
+                    backIcon.src = theme === "dark" ? "./svg/left_arrow_w.svg" : "./svg/left_arrow_b.svg";
+                }
+
+                updateMenuIcon(); // <-- Actualiza ícono del menú según tema
+            };
+
+            applyTheme(theme);
+
+            document.getElementById("theme-switch").addEventListener("click", () => {
+                const current = localStorage.getItem("theme") || "light";
+                const next = current === "light" ? "dark" : "light";
+                localStorage.setItem("theme", next);
+                applyTheme(next);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

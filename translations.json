@@ -1,0 +1,24 @@
+{
+  "es": {
+    "logo_text": "RETEJO",
+    "nav_home": "[ Inicio ]",
+    "nav_about": "[ Sobre mí ]",
+    "lang_code": "[ES]",
+    "posts_label_bg": "POSTS",
+    "posts_label": "> PUBLICACIONES",
+    "footer_text": "GNOSEOMÁTICO — 2025",
+    "about_section_bg": "ABOUT_ME",
+    "about_section_title": "> SOBRE_MI"
+  },
+  "eo": {
+    "logo_text": "RETEJO",
+    "nav_home": "[ Ĉefpaĝo ]",
+    "nav_about": "[ Pri mi ]",
+    "lang_code": "[EO]",
+    "posts_label_bg": "POSTS",
+    "posts_label": "> AFIŜOJ",
+    "footer_text": "GNOSEOMATIKO — 2025",
+    "about_section_bg": "ABOUT_ME",
+    "about_section_title": "> PRI_MI"
+  }
+}
