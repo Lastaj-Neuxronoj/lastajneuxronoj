@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+    	<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    	<title>Sobre mí | Lastaj Neŭronoj</title>
+        <script>
+    			// Aplicar el tema almacenado al cargar la página
+    			(function () {
+    				const theme = localStorage.getItem("theme") || "light";
+    				if (theme === "dark") {
+    					document.documentElement.classList.add("dark");
+    				}
+    			})();
+    		</script>
+        <!-- Styles -->
+    	<link rel="stylesheet" href="/style.css" />
+    	<link rel="stylesheet" href="/post.css" />
+    	<link rel="stylesheet" href="/header_footer.css" />
+    	<link rel="stylesheet" href="/mobile.css" media="(max-width: 768px)">
+
+    	<!-- Scripts -->
+    	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    	<!-- Google Fonts -->
+    	<link rel="preconnect" href="https://fonts.googleapis.com">
+    	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">>
+    	<link href="https://fonts.googleapis.com/css2?family=Hubot+Sans:ital,wght@0,200..900;1,200..900&family=Vollkorn:ital,wght@0,400..900;1,400..900display=swap"    rel="stylesheet">
+    </head>
+
+	<body data-page="about">
+	
+		<div id="header-container"></div>
+	
+		<main>
+			<article class="post">
+			
+				<div class="back-link">
+					<img id="back-icon"
+					     src="./svg/left_arrow_b.svg"
+					     alt="Flecha hacia atrás">
+					<a href="./index.html">VOLVER AL INICIO</a>
+				</div>
+			
+				<div class="post-section-header">
+					<div class="section-title-bg">
+						ABOUT_ME
+					</div>
+				
+					<h1 class="post-section-title"
+					    id="about-section-title">
+						> SOBRE_MI
+					</h1>
+				</div>
+			
+				<hr class="rect-line">
+			
+				<div class="post-content">
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec orci mauris, dapibus quis lacus vitae, molestie malesuada libero. Maecenas nisi dui, porttitor sit amet egestas non, bibendum nec lorem. Mauris placerat at est et facilisis. Nulla ac lacus est. Vivamus aliquam odio vel tortor euismod vehicula. Vestibulum at ante in tortor viverra pretium. Morbi et gravida justo, eget auctor elit. Aenean ut elit sit amet mauris cursus ornare. Nunc nec euismod massa, vitae dignissim libero. Integer at nisi mattis, sodales dolor et, ultrices turpis. </p>
+
+				</div>
+			
+			</article>
+		</main>
+	
+		<div id="footer-container"></div>
+	
+		<script src="/js/translation.js"></script>
+		<script src="/js/ui.js"></script>
+		<script src="/js/content.js"></script>
+		<script src="/js/main.js"></script>
+	
+	</body>
+</html>

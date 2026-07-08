@@ -1,0 +1,25 @@
+{
+	"name": "lastajneuxronoj",
+	"version": "1.0.0",
+	"description": "",
+	"main": "build-posts.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/lastajneuxronoj/lastajneuxronoj.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "commonjs",
+	"bugs": {
+		"url": "https://github.com/lastajneuxronoj/lastajneuxronoj/issues"
+	},
+	"homepage": "https://github.com/lastajneuxronoj/lastajneuxronoj#readme",
+	"dependencies": {
+		"katex": "^0.17.0",
+		"marked": "^18.0.5"
+	}
+}

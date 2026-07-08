@@ -1,0 +1,20 @@
+# Dependencias Node.js
+node_modules/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración local
+.env
+
+# Logs
+*.log
+
+# Carpetas temporales
+temp/
+tmp/
+
+# Archivos de respaldo
+*.bak
+*.tmp

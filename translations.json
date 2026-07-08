@@ -1,24 +1,90 @@
 {
-  "es": {
-    "logo_text": "RETEJO",
-    "nav_home": "[ Inicio ]",
-    "nav_about": "[ Sobre mí ]",
-    "lang_code": "[ES]",
-    "posts_label_bg": "POSTS",
-    "posts_label": "> PUBLICACIONES",
-    "footer_text": "RETEJO — 2026",
-    "about_section_bg": "ABOUT_ME",
-    "about_section_title": "> SOBRE_MI"
-  },
-  "eo": {
-    "logo_text": "RETEJO",
-    "nav_home": "[ Ĉefpaĝo ]",
-    "nav_about": "[ Pri mi ]",
-    "lang_code": "[EO]",
-    "posts_label_bg": "POSTS",
-    "posts_label": "> AFIŜOJ",
-    "footer_text": "RETEJO — 2026",
-    "about_section_bg": "ABOUT_ME",
-    "about_section_title": "> PRI_MI"
-  }
+	"es": {
+		"header": {
+			"logo_text": "Lastaj Neŭronoj",
+			"header_home": "[ Inicio ]",
+			"header_about": "[ Sobre mí ]",
+			"lang_code": "[ES]"
+		},
+		"posts": {
+			"label_bg": "POSTS",
+			"label": "> PUBLICACIONES",
+			"reading_time": "min de lectura"
+		},
+		"footer_text": "Lastaj Neŭronoj — 2026",
+		"about": {
+			"section_bg": "ABOUT_ME",
+			"section_title": "> SOBRE_MI",
+			"page_title": "Sobre mí"
+		},
+		"post": {
+			"notFound": "Post no encontrado.",
+			"markdownNotFound": "el archivo del post no fue encontrado.",
+			"contentLoadError": "Error al cargar contenido",
+			"previousPost": "PUBLICACIÓN ANTERIOR",
+			"nextPost": "PUBLICACIÓN SIGUIENTE"
+		},
+		"references": {
+			"figure": "Figura",
+			"equation": "Ecuación",
+			"table": "Tabla",
+			"code": "Código"
+		},
+		"languageNames": {
+			"es": "Español",
+			"eo": "Esperanto"
+		},
+		"languageNameMin": {
+			"es": "es",
+			"eo": "eo"
+		},
+		"errors": {
+			"onlyAvailableIn": "El siguiente artículo/página está sólo disponible en:"
+		},
+		"backToHome": "VOLVER AL INICIO"
+	},
+	"eo": {
+		"header": {
+			"logo_text": "Lastaj Neŭronoj",
+			"header_home": "[ Ĉefpaĝo ]",
+			"header_about": "[ Pri mi ]",
+			"lang_code": "[EO]"
+		},
+		"posts": {
+			"label_bg": "POSTS",
+			"label": "> BLOGAĴOJ",
+			"reading_time": "min da legado"
+		},
+		"footer_text": "Lastaj Neŭronoj — 2026",
+		"about": {
+			"section_bg": "ABOUT_ME",
+			"section_title": "> PRI_MI",
+			"page_title": "Pri mi"
+		},
+		"post": {
+			"notFound": "Blogaĵo ne trovita.",
+			"markdownNotFound": "blogaĵa dosiero ne trovita.",
+			"contentLoadError": "Eraro dum ŝargado de la enhavo.",
+			"previousPost": "ANTAŬA AFIŜO",
+			"nextPost": "SEKVA AFIŜO"
+		},
+		"references": {
+			"figure": "Figuro",
+			"equation": "Ekvacio",
+			"table": "Tabelo",
+			"code": "Kodo"
+		},
+		"languageNames": {
+			"es": "La hispana",
+			"eo": "Esperanto"
+		},
+		"languageNameMin": {
+			"es": "es",
+			"eo": "eo"
+		},
+		"errors": {
+			"onlyAvailableIn": "La sekva artikolo/paĝo disponeblas nur en la jenaj lingvoj:"
+		},
+		"backToHome": "REVENI AL LA ĈEFPAĜO"
+	}
 }
