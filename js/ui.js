@@ -389,3 +389,24 @@ function setupDetailsAnimation() {
 		});
 	});
 }
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+	link.addEventListener("click", function (event) {
+		const id = this.getAttribute("href");
+
+		if (id === "#") return;
+
+		const target = document.querySelector(id);
+
+		if (!target) return;
+
+		event.preventDefault();
+
+		target.scrollIntoView({
+			behavior: "smooth",
+			block: "start"
+		});
+
+		history.pushState(null, "", id);
+	});
+});

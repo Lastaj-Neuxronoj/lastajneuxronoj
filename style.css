@@ -141,6 +141,7 @@ main {
 	color: var(--primary-color);
 	opacity: 0.1;
 	pointer-events: none;
+	-webkit-user-select: none;
 	user-select: none;
 	z-index: 0;
 	font-family: var(--font-ui);
@@ -732,4 +733,34 @@ tbody tr:hover {
 	width: 1em;
 	height: 1em;
 	margin: 0;
+}
+
+.equation-content {
+	width: 100%;
+	overflow-x: auto;
+	height: auto;
+	overflow-y: hidden;
+	scrollbar-gutter: stable;
+	-webkit-overflow-scrolling: touch;
+}
+
+.equation-content > * {
+	min-width: max-content;
+}
+
+.equation-content::-webkit-scrollbar {
+	height: 5px;
+}
+
+.equation-content::-webkit-scrollbar-track {
+	background: var(--base-color);
+}
+
+.equation-content::-webkit-scrollbar-thumb {
+	background: var(--primary-color);
+	border-radius: 6px;
+}
+
+[id] {
+	scroll-margin-top: 100px;
 }

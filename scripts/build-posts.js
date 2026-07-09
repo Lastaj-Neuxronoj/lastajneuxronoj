@@ -110,6 +110,22 @@ function buildSEOData({
 }
 
 // Cuenta referencias
+function parseAttributes(attrs = "") {
+
+	const idMatch = attrs.match(
+		/#\s*([a-z]+:[a-zA-Z0-9_-]+)/
+	);
+
+	const titleMatch = attrs.match(
+		/title\s*=\s*"([^"]*)"/
+	);
+
+	return {
+		label: idMatch ? idMatch[1] : null,
+		title: titleMatch ? titleMatch[1] : ""
+	};
+}
+
 function preprocessReferences(markdown) {
 	let equationNumber = 0;
 	let figureNumber = 0;
@@ -120,53 +136,96 @@ function preprocessReferences(markdown) {
 
 	// Ecuaciones
 	markdown = markdown.replace(
-	/\$\$([\s\S]*?)\$\$\s*\{#(eq:[a-zA-Z0-9_-]+)\}[ \t]*(.*)/g,
-	(_, formula, label, description) => {
-		equationNumber++;
-		referenceMap[label] = {
-			type: "eq",
-			number: equationNumber,
-			formula: formula.trim(),
-			description: description.trim()
-		};
-		return `@@REF:${label}@@`;
+		/\$\$([\s\S]*?)\$\$\s*\{([^}]*)\}/g,
+		(_, formula, attrs) => {
+
+			const {label, title} = parseAttributes(attrs);
+
+			if (!label) return _;
+
+			equationNumber++;
+
+			referenceMap[label] = {
+				type: "eq",
+				number: equationNumber,
+				formula: formula.trim(),
+				description: title
+			};
+
+			return `@@REF:${label}@@`;
 		}
 	);
 
 	// Figuras
 	markdown = markdown.replace(
-		/!\[([^\]]*)\]\(([^)]+)\)\s*\{#(fig:[a-zA-Z0-9_-]+)\}/g,
-		(_, alt, src, label) => {
+		/!\[([^\]]*)\]\(([^)]+)\)\s*\{([^}]*)\}/g,
+		(_, alt, src, attrs) => {
+
+			const {label, title} = parseAttributes(attrs);
+
+			if (!label || !label.startsWith("fig:")) {
+				return _;
+			}
+
 			figureNumber++;
-			referenceMap[label] = { type: "fig", number: figureNumber, alt, src };
+
+			referenceMap[label] = {
+				type: "fig",
+				number: figureNumber,
+				alt,
+				src,
+				description: title
+			};
+
 			return `@@REF:${label}@@`;
 		}
 	);
 
 	// Tablas: {#tbl:xxx} Descripción opcional
 	markdown = markdown.replace(
-		/\{#(tbl:[a-zA-Z0-9_-]+)\}[ \t]*(.*)/g,
-		(_, label, description) => {
+		/\{([^}]*)\}/g,
+		(match, attrs) => {
+
+			const {label, title} = parseAttributes(attrs);
+
+			if (!label || !label.startsWith("tbl:")) {
+				return match;
+			}
+
 			tableNumber++;
+
 			referenceMap[label] = {
 				type: "tbl",
 				number: tableNumber,
-				description: description.trim()
+				description: title
 			};
+
 			return `@@REF:${label}@@`;
 		}
 	);
 
 	// Código
+	// Bloques de código con referencia
 	markdown = markdown.replace(
-		/\{#(code:[a-zA-Z0-9_-]+)\}[ \t]*(.*)/g,
-		(_, label, description) => {
+		/```(\w+)?\s*\{([^}]*)\}\s*\n([\s\S]*?)```/g,
+		(_, language, attrs, code) => {
+		
+			const {label, title} = parseAttributes(attrs);
+		
+			if (!label || !label.startsWith("code:")) {
+				return _;
+			}
+		
 			codeNumber++;
+		
 			referenceMap[label] = {
 				type: "code",
 				number: codeNumber,
-				description: description.trim()
+				language: language || "",
+				code: code.trim(),
+				description: title
 			};
+		
 			return `@@REF:${label}@@`;
 		}
 	);
@@ -221,23 +280,27 @@ function renderReferences(html, referenceMap = {}, lang, translations) {
 					return `
 					<figure id="${id}">
 						<img src="${ref.src}" alt="${ref.alt}">
-						<figcaption class="figure-caption">${labels.figure} ${ref.number}: ${ref.alt}</figcaption>
+						<figcaption class="figure-caption">
+							${labels.figure} ${ref.number}${ref.description ? `: ${ref.description}` : ""}
+						</figcaption>
 					</figure>
 					`;
 
 				case "tbl":
 					return `
-					<div class="table-caption" id="${id}">
+					<div class="table-anchor" data-table-id="${id}"></div>
+					<figcaption class="table-caption">
 						${labels.table} ${ref.number}${ref.description ? `: ${ref.description}` : ""}
-					</div>
+					</figcaption>
 					`;
 
-				case "code":
-					return `
-					<div class="code-caption" id="${id}">
-						${labels.code} ${ref.number}${ref.description ? `: ${ref.description}` : ""}
-					</div>
-					`;
+case "code":
+	return `
+<figure class="code-block" id="${id}">
+<pre><code class="language-${ref.language}">${escapeHTML(ref.code)}</code></pre>
+<figcaption class="code-caption">${labels.code} ${ref.number}${ref.description ? `: ${ref.description}` : ""}</figcaption>
+</figure>
+`;
 			}
 		}
 	);
@@ -385,30 +448,11 @@ async function main() {
 			const mdPath = path.join(POSTS_MD_DIR, post.file[lang]);
 			const md = await fs.readFile(mdPath, "utf-8");
 
-			const {
-				markdown,
-				referenceMap
-			} = preprocessReferences(md);
-
-
-			// Markdown → HTML (compatible con emojis)
-			let htmlContent = marked.parse(markdown);
-
-			// Twemoji debe ejecutarse al final para evitar interferencias
-			// con KaTeX y los marcadores personalizados de referencias.
-			htmlContent = renderTwemojiContent(htmlContent);
-
-			// Envolver tablas en un contenedor con scroll horizontal
-			htmlContent = htmlContent.replace(
-				/<table[\s\S]*?<\/table>/g,
-				match => `<div class="table-wrapper">${match}</div>`
+			const htmlContent = renderMarkdownContent(
+				md,
+				lang,
+				translations
 			);
-
-			// Renderizar KaTeX
-			htmlContent = renderReferences(htmlContent, referenceMap, lang, translations);
-
-			// Reemplazar referencias @eq:... en Markdown
-			htmlContent = replaceReferences(htmlContent, referenceMap, lang, translations);
 
 			const readingTime = estimateReadingTime(htmlContent);
 
@@ -503,7 +547,13 @@ async function buildStaticPages(pages, translations) {
 			}
 
 			const md = await fs.readFile(mdPath, "utf-8");
-			const htmlContent = marked.parse(md);
+
+			const htmlContent = renderMarkdownContent(
+				md,
+				lang,
+				translations
+			);
+
 			const coverImage = await findCoverImage(page.id);
 			const html = await renderPage({
 				type: "page",
@@ -551,6 +601,59 @@ function renderEmojiImg(emoji) {
 		folder: "svg",
 		ext: ".svg",
 	});
+}
+
+function renderMarkdownContent(md, lang, translations) {
+
+	const {
+		markdown,
+		referenceMap
+	} = preprocessReferences(md);
+
+
+	// Markdown → HTML
+	let html = marked.parse(markdown);
+
+
+	// Renderizar KaTeX y bloques con referencias
+	html = renderReferences(
+		html,
+		referenceMap,
+		lang,
+		translations
+	);
+
+	// Envolver tablas en un contenedor con scroll horizontal
+	html = html.replace(
+		/<table[\s\S]*?<\/table>\s*(?:<p>)?\s*<div class="table-anchor" data-table-id="([^"]+)"><\/div>\s*(?:<\/p>)?/g,
+		(match, id) => {
+		
+			const table = match
+				.replace(/<div class="table-anchor"[\s\S]*?<\/div>/, "")
+				.replace(/<\/?p>/g, "")
+				.trim();
+		
+			return `
+			<div class="table-wrapper" id="${id}">
+				${table}
+			</div>`;
+		}
+	);
+
+	// Reemplazar referencias @eq, @fig, @tbl, @code
+	html = replaceReferences(
+		html,
+		referenceMap,
+		lang,
+		translations
+	);
+
+
+	// Twemoji debe ejecutarse al final para evitar
+	// interferencias con KaTeX y el sistema de referencias
+	html = renderTwemojiContent(html);
+
+	return html;
 }
 
 function renderTwemojiContent(html) {

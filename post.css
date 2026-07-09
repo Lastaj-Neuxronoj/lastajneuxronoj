@@ -44,6 +44,7 @@ body.dark {
 	opacity: 0.1;
 	z-index: 0;
 	pointer-events: none;
+	-webkit-user-select: none;
 	user-select: none;
 	line-height: 1;
 }
@@ -350,28 +351,3 @@ body.dark {
 	font-family: "Vollkorn", serif;
 }
 
-.equation-content {
-	width: 100%;
-	overflow-x: auto;
-	height: auto;
-	overflow-y: hidden;
-	scrollbar-gutter: stable;
-	-webkit-overflow-scrolling: touch;
-}
-
-.equation-content > * {
-	min-width: max-content;
-}
-
-.equation-content::-webkit-scrollbar {
-	height: 5px;
-}
-
-.equation-content::-webkit-scrollbar-track {
-	background: var(--base-color);
-}
-
-.equation-content::-webkit-scrollbar-thumb {
-	background: var(--primary-color);
-	border-radius: 6px;
-}
