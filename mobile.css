@@ -97,7 +97,8 @@ body>main {
 }
 
 .post-number {
-	font-size: 3rem;
+	font-size: 2rem;
+	margin-right: 10px;
 }
 
 .post-number-bg {
@@ -106,7 +107,7 @@ body>main {
 }
 
 .post-title {
-	font-size: 2rem;
+	font-size: 1.25rem;
 }
 
 .post-date {
@@ -118,7 +119,7 @@ body>main {
 }
 
 .post-excerpt {
-	font-size: 0.75rem;
+	font-size: 1rem;
 }
 
 /* POSTS */
@@ -155,10 +156,19 @@ body>main {
 	flex-direction: column;
   }
 
-  .text-image img {
+.text-image img {
 	width: 100%;
-  }
+}
 
-  .table-wrapper {
+.table-wrapper {
 	-webkit-overflow-scrolling: touch;
+}
+
+.post-card {
+	padding:14px;
+}
+
+.post-card-media {
+	width: 120px;
+	height: 120px;
 }

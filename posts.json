@@ -39,14 +39,15 @@
 		},
 		"date": "2025-07-14",
 		"excerpt": {
-			"eo": "Ĉi tio estas prova artikolo en Esperanto."
+			"eo": "Ĉi tio estas la dua prova artikolo en Esperanto: Maecenas in eleifend tortor. Fusce suscipit sapien ut euismod ultrices. Nam nec accumsan eros. Ut sed facilisis eros. Ut eget purus consequat nibh fermentum tempus ac sit amet neque. Proin vitae vulputate tellus. Nulla ac venenatis augue. Nam ac dolor nibh. Morbi at auctor ipsum, in tincidunt ipsum"
 		}
 	},
 	{
 		"number": "001",
 		"emoji": "🤔",
+		"cover": "/covers/001.webp",
 		"title": {
-			"eo": "Provo 1"
+			"eo": "Provo 1: Tre longa titolo en esperanto, kiu estas utila por kontroli la interfacon"
 		},
 		"file": {
 			"eo": "001_eo.md"
@@ -60,12 +61,12 @@
 		},
 		"date": "2025-07-14",
 		"excerpt": {
-			"eo": "Ĉi tio estas prova artikolo en Esperanto."
+			"eo": "Ĉi tio estas prova artikolo en Esperanto. Maecenas in eleifend tortor. Fusce suscipit sapien ut euismod ultrices. Nam nec accumsan eros. Ut sed facilisis eros. Ut eget purus consequat nibh fermentum tempus ac sit amet neque. Proin vitae vulputate tellus. Nulla ac venenatis augue. Nam ac dolor nibh. Morbi at auctor ipsum, in tincidunt ipsum. "
 		}
 	},
 	{
 		"number": "000",
-		"emoji": "😡",
+		"emoji": "",
 		"title": {
 			"es": "Prueba 0",
 			"eo": "Provo 0"
@@ -86,7 +87,7 @@
 		"date": "2025-07-13",
 		"excerpt": {
 			"es": "Descripción 0",
-			"eo": "Priskribo 0"
+			"eo": "Priskribo 0: Maecenas in eleifend tortor. Fusce suscipit sapien ut euismod ultrices. Nam nec accumsan eros. Ut sed facilisis eros. Ut eget purus consequat nibh fermentum tempus ac sit amet neque. Proin vitae vulputate tellus. Nulla ac venenatis augue. Nam ac dolor nibh. Morbi at auctor ipsum, in tincidunt ipsum"
 		}
 	}
 ]

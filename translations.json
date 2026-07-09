@@ -40,7 +40,7 @@
 			"eo": "eo"
 		},
 		"errors": {
-			"onlyAvailableIn": "El siguiente artículo/página está sólo disponible en:"
+			"onlyAvailableIn": "La siguiente entrada o página está disponible sólo en:"
 		},
 		"backToHome": "VOLVER AL INICIO"
 	},
@@ -85,7 +85,7 @@
 			"eo": "eo"
 		},
 		"errors": {
-			"onlyAvailableIn": "La sekva artikolo/paĝo disponeblas nur en la jenaj lingvoj:"
+			"onlyAvailableIn": "La sekva blogaĵo aŭ retpaĝo disponeblas nur en la jenaj lingvoj:"
 		},
 		"backToHome": "REVENI AL LA ĈEFPAĜO"
 	}

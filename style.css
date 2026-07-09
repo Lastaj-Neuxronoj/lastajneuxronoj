@@ -164,11 +164,17 @@ main {
 /* Tarjeta */
 .post-card {
 	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 1rem;
+
 	border: 2px solid var(--primary-color);
+	border-radius: 8px;
 	padding: 1.5rem;
 	background-color: var(--background-color);
 	transition: background-color 0.3s;
 	cursor: pointer;
+
 	opacity: 0;
 	transform: translateX(20px);
 	animation: postEnter 0.4s ease-out forwards;
@@ -220,7 +226,24 @@ main {
 	margin-bottom: 0.3rem;
 }
 
+.post-main {
+	display: flex;
+	flex: 1;
+	min-width: 0;
+}
+
 .post-title {
+	font-family: var(--font-ui);
+	text-align: start;
+	font-weight: 600;
+	letter-spacing: 1px;
+	font-size: 1.5rem;
+	font-weight: bold;
+	margin-bottom: 0.3rem;
+	color: var(--primary-color);
+}
+
+.post-title-index {
 	font-family: var(--font-ui);
 	text-align: start;
 	font-weight: 600;
@@ -245,6 +268,14 @@ main {
 	font-size: 1rem;
 	color: var(--primary-color);
 	line-height: 1.5;
+
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 4;
+	line-clamp: 4;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .text-image {
@@ -634,3 +665,64 @@ tbody tr:hover {
 .post-cover.has-emoji:not(.has-image) .post-emoji-badge {
 	position: static;
 }
+
+.post-card-media {
+	position: relative;
+	width: 160px;
+	height: 160px;
+	flex-shrink: 0;
+	align-self: center;
+}
+
+.post-card-cover {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	border-radius: 8px;
+}
+
+.post-card-emoji-only {
+	width: 64px;
+	height: 64px;
+	flex-shrink: 0;
+	align-self: center;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	background: var(--background-color);
+	border: 3px solid var(--primary-color);
+	border-radius: 12px;
+	box-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
+
+.post-card-emoji-only img {
+	width: 36px;
+	height: 36px;
+}
+
+.post-card-emoji {
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+
+	width: 64px;
+	height: 64px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	background: var(--background-color);
+	border: 3px solid var(--primary-color);
+	border-radius: 12px;
+	box-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
+
+.post-card-emoji img {
+	width: 36px;
+	height: 36px;
+}
+
