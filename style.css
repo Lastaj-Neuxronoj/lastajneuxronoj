@@ -569,3 +569,68 @@ tbody tr:hover {
 .lang-modal-list a[data-lang="es"] {
 	--lang-accent: #AA151B; /* rojo bandera española */
 }
+
+.post-section-head {
+	position: relative;
+}
+
+.post-cover {
+	--badge-size: 64px;
+	position: relative;
+	margin-bottom: 3.5rem; /* antes calc(badge/2 + 16px), ahora incluye el offset de .section-title-bg */
+}
+
+/* Caso 4 (nada): .post-cover ni siquiera existe en el HTML, no requiere CSS */
+
+.post-cover-image {
+	display: block;
+	width: 100%;
+	height: 280px;
+	object-fit: cover;
+	border-radius: 8px;
+}
+
+.post-emoji-badge {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 64px;
+	height: 64px;
+	background: var(--bg-color, #1a1a1a);
+	border: 3px solid var(--border-color, #ffffff);
+	border-radius: 12px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+	z-index: 2;
+}
+
+.post-emoji-badge img {
+	width: 36px;
+	height: 36px;
+}
+
+/* Caso 1: imagen + emoji → badge montado sobre el borde inferior */
+.post-cover.has-image.has-emoji {
+	margin-bottom: 5rem; /* espacio extra para que el badge no choque con el título */
+}
+
+.post-cover.has-image.has-emoji .post-emoji-badge {
+	position: absolute;
+	left: 24px;
+	bottom: -32px; /* mitad de la altura del badge: queda "mordiendo" el borde */
+}
+
+.post-section-header {
+	position: relative;
+	padding-left: 24px;
+}
+
+/* Caso 2: solo imagen → sin ajustes extra, el badge no existe en el HTML */
+
+/* Caso 3: solo emoji → badge suelto, estático, sin superposición */
+.post-cover.has-emoji:not(.has-image) {
+	display: block;
+}
+
+.post-cover.has-emoji:not(.has-image) .post-emoji-badge {
+	position: static;
+}

@@ -78,10 +78,13 @@
 	        	    <a href="/index.html">{{backToHome}}</a>
 	        	</div>
 			
-	        	<div class="post-section-header">
-	        		<div class="section-title-bg">{{number}}</div>
-	        		<h1 class="post-title">{{postTitle}}</h1>
-	        	</div>
+				<div class="post-section-head">
+					{{cover}}
+	        		<div class="post-section-header">
+	        			<div class="section-title-bg">{{number}}</div>
+	        			<h1 class="post-title">{{postTitle}}</h1>
+	        		</div>
+				</div>
 
 				<div class="post-meta">
 					{{meta}}
@@ -89,6 +92,8 @@
 						| {{readingTime}} {{readingLabel}}
 					</span>
 				</div>
+
+				
 
 				<hr class="rect-line" />
 	        	<div class="post-content">{{body}}</div>

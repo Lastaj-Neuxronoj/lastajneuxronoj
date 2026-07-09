@@ -16,6 +16,7 @@ const fs = require("fs/promises");
 const path = require("path");
 const { marked } = require("marked");
 const katex = require("katex");
+const twemoji = require("@twemoji/api");
 
 const ROOT = path.resolve(__dirname, "..");
 
@@ -398,6 +399,8 @@ async function main() {
 				readingMinutes: Math.ceil(words / 200)
 			});
 
+			const coverImage = await findCoverImage(post.number);
+
 			const html = await renderPage({
 				type: "post",
 				data: {
@@ -409,6 +412,7 @@ async function main() {
 					nextPost,
 					translations,
 					availableLangs: Object.keys(post.file),
+					coverImage,
 				},
 			});
 
@@ -477,7 +481,7 @@ async function buildStaticPages(pages, translations) {
 
 			const md = await fs.readFile(mdPath, "utf-8");
 			const htmlContent = marked.parse(md);
-
+			const coverImage = await findCoverImage(page.id);
 			const html = await renderPage({
 				type: "page",
 				data: {
@@ -485,7 +489,8 @@ async function buildStaticPages(pages, translations) {
 					lang,
 					htmlContent,
 					translations,
-					availableLangs
+					availableLangs,
+					coverImage,
 				},
 			});
 
@@ -514,6 +519,79 @@ async function buildStaticPages(pages, translations) {
 // =========================
 // RENDER SYSTEM
 // =========================
+
+// Devuelve solo el <img> del emoji (o "" si no hay)
+function renderEmojiImg(emoji) {
+	if (!emoji) return "";
+
+	return twemoji.parse(emoji, {
+		folder: "svg",
+		ext: ".svg",
+	});
+}
+
+// Arma el bloque de portada: imagen + badge de emoji superpuesto
+function renderCover({ image, emoji }) {
+	const emojiImg = renderEmojiImg(emoji);
+	const hasImage = Boolean(image);
+	const hasEmoji = Boolean(emojiImg);
+
+	const imageTag = hasImage
+		? `<img src="/${image}" alt="" class="post-cover-image">`
+		: "";
+
+	const badgeTag = hasEmoji
+		? `<div class="post-emoji-badge">${emojiImg}</div>`
+		: "";
+
+	// Caso 1: imagen + emoji → badge superpuesto sobre el borde
+	if (hasImage && hasEmoji) {
+		return `
+<div class="post-cover has-image has-emoji">
+	${imageTag}
+	${badgeTag}
+</div>`;
+	}
+
+	// Caso 2: solo imagen → sin badge
+	if (hasImage && !hasEmoji) {
+		return `
+<div class="post-cover has-image">
+	${imageTag}
+</div>`;
+	}
+
+	// Caso 3: solo emoji → badge suelto, sin imagen ni superposición
+	if (!hasImage && hasEmoji) {
+		return `
+<div class="post-cover has-emoji">
+	${badgeTag}
+</div>`;
+	}
+
+	// Caso 4: nada → no se renderiza contenedor alguno
+	return "";
+}
+
+
+//Busca imagen de portada
+const COVERS_DIR = path.join(ROOT, "covers");
+const COVER_EXTENSIONS = ["jpg", "jpeg", "png", "webp"];
+
+async function findCoverImage(id) {
+	for (const ext of COVER_EXTENSIONS) {
+		const filePath = path.join(COVERS_DIR, `${id}.${ext}`);
+
+		try {
+			await fs.access(filePath);
+			return `covers/${id}.${ext}`; // ruta relativa, para usar en src/og:image
+		} catch {
+			// no existe con esta extensión, prueba la siguiente
+		}
+	}
+
+	return null; // no hay portada para este id
+}
 
 function escapeHTML(text = "") {
 	return text
@@ -553,8 +631,7 @@ async function renderPage({ type, data }) {
 				url,
 				lang: data.lang,
 				type: "BlogPosting",
-				image: data.post.image || "",
-			
+				image: data.coverImage || "",
 				alternates: Object.fromEntries(
 					data.availableLangs.map(lang => [
 						lang,
@@ -598,10 +675,16 @@ async function renderPage({ type, data }) {
 				</div>
 			`;
 
+			const coverHtml = renderCover({
+				image: data.coverImage,
+				emoji: data.post.emoji,
+			});
+
 			return renderTemplate(template, {
 				lang: data.lang,
 				title: buildPageTitle(data.post.title[data.lang]),
 				postTitle: data.post.title[data.lang],
+				cover: coverHtml,
 				number: data.post.number,
 				date: data.post.date,
 				meta,
@@ -635,12 +718,8 @@ async function renderPage({ type, data }) {
 				description: data.page.description?.[data.lang] || "",
 				url,
 				lang: data.lang,
-				type: data.page.id === "about"
-					? "AboutPage"
-					: "WebPage",
-			
-				image: data.page.image || "",
-			
+				type: data.page.id === "about" ? "AboutPage" : "WebPage",
+				image: data.coverImage || "",   // <-- actualizado
 				alternates: Object.fromEntries(
 					data.availableLangs.map(lang => [
 						lang,
@@ -649,10 +728,15 @@ async function renderPage({ type, data }) {
 				)
 			});
 		
+			const coverHtml = renderCover({
+				image: data.coverImage,
+				emoji: data.page.emoji,
+			});
+
 			return renderTemplate(template, {
 				lang: data.lang,
 				title: buildPageTitle(data.page.title[data.lang]),
-			
+				cover: coverHtml,
 				...seo,
 			
 				langMap: JSON.stringify(langMap),
