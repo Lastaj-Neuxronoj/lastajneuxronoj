@@ -36,6 +36,7 @@ const { marked } = require("marked");
 const katex = require("katex");
 const twemoji = require("@twemoji/api");
 const cheerio = require("cheerio");
+const hljs = require("highlight.js");
 
 const ROOT = path.resolve(__dirname, "..");
 
@@ -610,10 +611,8 @@ function renderMarkdownContent(md, lang, translations) {
 		referenceMap
 	} = preprocessReferences(md);
 
-
 	// Markdown → HTML
 	let html = marked.parse(markdown);
-
 
 	// Renderizar KaTeX y bloques con referencias
 	html = renderReferences(
@@ -623,16 +622,16 @@ function renderMarkdownContent(md, lang, translations) {
 		translations
 	);
 
-	// Envolver tablas en un contenedor con scroll horizontal
+	// Envolver tablas
 	html = html.replace(
 		/<table[\s\S]*?<\/table>\s*(?:<p>)?\s*<div class="table-anchor" data-table-id="([^"]+)"><\/div>\s*(?:<\/p>)?/g,
 		(match, id) => {
-		
+
 			const table = match
 				.replace(/<div class="table-anchor"[\s\S]*?<\/div>/, "")
 				.replace(/<\/?p>/g, "")
 				.trim();
-		
+
 			return `
 			<div class="table-wrapper" id="${id}">
 				${table}
@@ -640,7 +639,7 @@ function renderMarkdownContent(md, lang, translations) {
 		}
 	);
 
-	// Reemplazar referencias @eq, @fig, @tbl, @code
+	// Reemplazar referencias
 	html = replaceReferences(
 		html,
 		referenceMap,
@@ -648,12 +647,80 @@ function renderMarkdownContent(md, lang, translations) {
 		translations
 	);
 
-
-	// Twemoji debe ejecutarse al final para evitar
-	// interferencias con KaTeX y el sistema de referencias
+	// Twemoji al final
 	html = renderTwemojiContent(html);
 
+	// ← Agrega nombre del lenguaje de programación y formatea el código con color
+	html = addCodeLanguageLabels(html);
+	html = highlightCodeBlocks(html);
+
 	return html;
+}
+
+
+// Texto de bloque de código con formato
+function highlightCodeBlocks(html) {
+
+	const $ = cheerio.load(html);
+
+	$("pre code").each((_, element) => {
+
+		const code = $(element).text();
+
+		const highlighted = hljs.highlightAuto(code);
+
+		$(element)
+			.addClass(`hljs ${highlighted.language || ""}`)
+			.html(highlighted.value);
+
+	});
+
+	return $.html();
+}
+
+function addCodeLanguageLabels(html) {
+
+	const $ = cheerio.load(html);
+
+	const languageNames = {
+		js: "JavaScript",
+		ts: "TypeScript",
+		r: "R",
+		py: "Python",
+		bash: "Bash",
+		sh: "Shell",
+		html: "HTML",
+		css: "CSS",
+		json: "JSON",
+		sql: "SQL",
+		yaml: "YAML",
+		md: "Markdown"
+	};
+
+	$("pre").each((_, pre) => {
+
+		const code = $(pre).find("code");
+
+		if (!code.length) return;
+
+		const className = code.attr("class") || "";
+		const match = className.match(/language-([a-zA-Z0-9_-]+)/);
+
+		if (!match) return;
+
+		const languageId = match[1].toLowerCase();
+
+		const language =
+			languageNames[languageId] || match[1];
+
+		$(pre).before(
+			`<div class="code-language">${language}</div>`
+			
+		);
+
+	});
+
+	return $.html();
 }
 
 function renderTwemojiContent(html) {

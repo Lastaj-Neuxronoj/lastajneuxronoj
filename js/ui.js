@@ -175,6 +175,8 @@ function setupTheme() {
 		updateMenuIcon();
 
 		setIconSrc(theme, animate);
+
+		updateHighlightTheme(theme);
 	}
 
 
@@ -390,6 +392,22 @@ function setupDetailsAnimation() {
 	});
 }
 
+// Cambia los colores del pre code (invertido)
+function updateHighlightTheme(theme) {
+	const light = document.getElementById("hljs-dark");
+	const dark = document.getElementById("hljs-light");
+
+	if (!light || !dark) return;
+
+	const isDark = theme === "dark";
+
+	light.disabled = isDark;
+	dark.disabled = !isDark;
+}
+
+
+
+//Agrega un scroll suave
 document.querySelectorAll('a[href^="#"]').forEach(link => {
 	link.addEventListener("click", function (event) {
 		const id = this.getAttribute("href");

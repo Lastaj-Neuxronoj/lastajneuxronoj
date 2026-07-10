@@ -162,6 +162,7 @@ body.dark {
 
 .prev-post {
 	text-align: left;
+	margin-top: 0;
 }
 
 .next-post {
@@ -308,7 +309,9 @@ body.dark {
 .post-content pre {
 	background-color: var(--primary-color) !important;
 	padding: 1rem;
-	border-radius: 8px;
+	border-top-right-radius: 8px;
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
 	overflow-x: auto;
 	margin-bottom: 1rem;
 }

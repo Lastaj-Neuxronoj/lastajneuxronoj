@@ -764,3 +764,25 @@ tbody tr:hover {
 [id] {
 	scroll-margin-top: 100px;
 }
+
+.code-language {
+	display: inline-block;
+
+	padding: 0.25rem 0.75rem;
+
+	font-family: var(--font-ui);
+	font-size: 0.85rem;
+	font-weight: 600;
+
+	background: var(--secondary-color);
+	color: var(--background-color);
+
+	border-radius: 0.5rem 0.5rem 0 0;
+
+	margin-bottom: -2px;
+}
+
+.code-language + pre {
+	margin-top: -1px;
+
+}
