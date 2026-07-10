@@ -776,12 +776,6 @@ tbody tr:hover {
 
 /* ==========================================
    BLOQUES DE CÓDIGO (highlight.js)
-   ⚠️ Estas reglas usan `.post-content pre`, es decir,
-   dependen de que .post-content sea el CUERPO COMPLETO
-   de un post (la versión de post.css), no la tarjeta de
-   la lista (la versión de este archivo, más arriba).
-   Considerar mover esta sección entera a post.css si
-   los bloques de código solo aparecen dentro de posts.
 ========================================== */
 
 .code-language {
@@ -887,3 +881,37 @@ tbody tr:hover {
 	font-size: 16px;
 }
 
+/* ==========================================
+   CALLOUTS MARKDOWN
+========================================== */
+
+.callout {
+	margin: 1.5rem 0;
+	padding: 1rem 1.25rem;
+	border-left: 4px solid var(--tertiary-color);
+	background-color: var(--base-color);
+	border-radius: 0 8px 8px 0;
+	font-family: var(--font-body);
+}
+
+.callout-title {
+	font-family: var(--font-ui);
+	font-weight: 700;
+	color: var(--primary-color);
+	margin-bottom: 0.5rem;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	position:relative;
+}
+
+.callout-title::before {
+	position: absolute;
+	left: 0;
+	width: 1.25rem;
+	text-align: center;
+}
+
+.callout-content p:last-child {
+	margin-bottom: 0;
+}

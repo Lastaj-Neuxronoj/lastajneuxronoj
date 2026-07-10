@@ -42,6 +42,13 @@
 		"errors": {
 			"onlyAvailableIn": "La siguiente entrada o página está disponible sólo en:"
 		},
+		"callouts": {
+    		"note": "Nota",
+    		"warning": "Advertencia",
+    		"tip": "Consejo",
+    		"definition": "Definición",
+    		"example": "Ejemplo"
+		},
 		"backToHome": "VOLVER AL INICIO"
 	},
 	"eo": {
@@ -86,6 +93,13 @@
 		},
 		"errors": {
 			"onlyAvailableIn": "La sekva blogaĵo aŭ retpaĝo disponeblas nur en la jenaj lingvoj:"
+		},
+		"callouts": {
+    		"note": "Noto",
+    		"warning": "Averto",
+    		"tip": "Konsilo",
+    		"definition": "Difino",
+    		"example": "Ekzemplo"
 		},
 		"backToHome": "REVENI AL LA ĈEFPAĜO"
 	}

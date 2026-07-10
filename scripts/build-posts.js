@@ -37,6 +37,8 @@ const katex = require("katex");
 const twemoji = require("@twemoji/api");
 const cheerio = require("cheerio");
 const hljs = require("highlight.js");
+const { preprocessCallouts } = require("./callouts");
+
 
 const ROOT = path.resolve(__dirname, "..");
 
@@ -606,10 +608,13 @@ function renderEmojiImg(emoji) {
 
 function renderMarkdownContent(md, lang, translations) {
 
+	// Extensiones Markdown propias
+	let processedMarkdown = preprocessCallouts(md, translations[lang]);
+
 	const {
 		markdown,
 		referenceMap
-	} = preprocessReferences(md);
+	} = preprocessReferences(processedMarkdown);
 
 	// Markdown → HTML
 	let html = marked.parse(markdown);
@@ -650,7 +655,7 @@ function renderMarkdownContent(md, lang, translations) {
 	// Twemoji al final
 	html = renderTwemojiContent(html);
 
-	// ← Agrega nombre del lenguaje de programación, formatea el código con color y agrega número de línea
+	// Código
 	html = addCodeLanguageLabels(html);
 	html = highlightCodeBlocks(html);
 	html = addLineNumbers(html);
