@@ -1,21 +1,21 @@
 /* stylelint-disable font-family-no-missing-generic-family-keyword */
 @font-face {
   font-family: "KaTeX_AMS";
-  src: url("/fonts/Katex_AMS-Regular.woff2") format("woff2"), url("/fonts/Katex_AMS-Regular.woff") format("woff"), url("/fonts/Katex_AMS-Regular.ttf") format("truetype");
+  src: url(/fonts/Katex_AMS-Regular.woff2) format("woff2"), url(/fonts/Katex_AMS-Regular.woff) format("woff"), url("/fonts/Katex_AMS-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
 @font-face {
   font-family: "KaTeX_Caligraphic";
-  src: url("/fonts/Katex_Caligraphic-Bold.woff2") format("woff2"), url("/fonts/Katex_Caligraphic-Bold.woff") format("woff"), url("/fonts/Katex_Caligraphic-Bold.ttf") format("truetype");
+  src: url(/fonts/Katex_Caligraphic-Bold.woff2) format("woff2"), url(/fonts/Katex_Caligraphic-Bold.woff) format("woff"), url("/fonts/Katex_Caligraphic-Bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
   font-display: block;
 }
 @font-face {
   font-family: "KaTeX_Caligraphic";
-  src: url("/fonts/Katex_Caligraphic-Regular.woff2") format("woff2"), url("/fonts/Katex_Caligraphic-Regular.woff") format("woff"), url("/fonts/Katex_Caligraphic-Regular.ttf") format("truetype");
+  src: url(/fonts/Katex_Caligraphic-Regular.woff2) format("woff2"), url(/fonts/Katex_Caligraphic-Regular.woff) format("woff"), url("/fonts/Katex_Caligraphic-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: block;

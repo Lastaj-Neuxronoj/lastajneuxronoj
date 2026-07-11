@@ -592,7 +592,7 @@ async function buildCategoryPages(posts, translations) {
 				section_title: categoryName,
 				categorySlug,
 				categoryAvailableLangs: [...categoryLangs[categorySlug]].join(","),
-				titleId: slugify(categoryName, { lower: true, strict: true })
+				titleId: slugify(categoryName, { lower: true, strict: true }),
 			});
 
 			const outDir = path.join(ROOT, "categories");
