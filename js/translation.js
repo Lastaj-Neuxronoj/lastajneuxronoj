@@ -8,7 +8,7 @@ let translationsCache = null;
 async function getTranslations() {
 	if (translationsCache) return translationsCache;
 
-	const res = await fetch("/translations.json");
+	const res = await fetch("json/translations.json");
 	translationsCache = await res.json();
 	return translationsCache;
 }

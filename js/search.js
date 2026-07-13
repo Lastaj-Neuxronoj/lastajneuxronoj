@@ -358,7 +358,7 @@ async function setupSearchTranslations(lang) {
 
 	try {
 		const response = 
-			await fetch("/translations.json");
+			await fetch("json/translations.json");
 
 		const translations =
 			await response.json();

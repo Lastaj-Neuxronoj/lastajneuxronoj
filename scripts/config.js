@@ -18,6 +18,9 @@ const COVER_EXTENSIONS = [
 	"gif"
 ];
 
+const JSON_DIR =
+	path.join(ROOT, "json");
+
 module.exports = {
 
 	ROOT,
@@ -35,23 +38,26 @@ module.exports = {
 	COVERS_DIR,
 	COVER_EXTENSIONS,
 
+	JSON_DIR,
+
 	SEARCH_DIR:
 	path.join(ROOT, "search"),
 
 	POSTS_JSON_PATH:
-		path.join(ROOT, "posts.json"),
+		path.join(JSON_DIR, "posts.json"),
 
 	PAGES_JSON_PATH:
-		path.join(ROOT, "pages.json"),
+		path.join(JSON_DIR, "pages.json"),
 
 	TRANSLATIONS_JSON_PATH:
-		path.join(ROOT, "translations.json"),
+		path.join(JSON_DIR, "translations.json"),
 
 	POSTS_MD_DIR:
 		path.join(ROOT, "posts"),
 
 	OUTPUT_DIR:
 		path.join(ROOT, "blog"),
+	
 
 	ABOUT_OUTPUT_DIR:
 		ROOT,
@@ -60,7 +66,7 @@ module.exports = {
 		path.join(ROOT, "sitemap.xml"),
 
 	SITEMAP_EXTRA_PATH:
-		path.join(ROOT, "sitemap-extra.json"),
+		path.join(JSON_DIR, "sitemap-extra.json"),
 
 	STATS_DIR:
 		path.join(ROOT, "stats"),
@@ -74,6 +80,4 @@ module.exports = {
 	HISTORY_JSON_PATH:
 		path.join(ROOT, "stats", "history.json"),
 	
-	
-
 };

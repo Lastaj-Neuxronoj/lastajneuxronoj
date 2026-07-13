@@ -18,13 +18,7 @@
 	<!--Agregar idiomas-->
 	<link rel="alternate" hreflang="eo" href="https://lastajneuxronoj.github.io/">
 	<link rel="alternate" hreflang="es" href="https://lastajneuxronoj.github.io/">
-	
-				<link
-					rel="alternate"
-					type="application/rss+xml"
-					title="Lastaj Neŭronoj - eo"
-					href="/rss-eo.xml">
-			
+	{{rssLink}}
 	<link rel="icon" type="image/svg+xml" href="/svg/logo-mark.svg">
 	<link rel="icon" type="image/x-icon" href="/favicon.ico">
 
@@ -75,17 +69,31 @@
 	<link href="https://fonts.googleapis.com/css2?family=Hubot+Sans:ital,wght@0,200..900;1,200..900&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 </head>
 
-<body data-page="category" data-category="test" data-available-langs="eo">
+<body data-page="categories-index" data-category="{{categorySlug}}" data-available-langs="{{categoryAvailableLangs}}">
 	<div id="header-container"></div>
 
-	<main class="post-list" id="post-list-container">
-		<div class="post-section-header">
-			<div class="section-title-bg">Kategorioj</div>
-			<h2 class="post-section-title" id="prueba">Prueba</h2>
-		</div>
+    <main class="post-list" id="post-list-container">
 
-		<div id="post-list"></div>
-	</main>
+    	<div class="post-section-header">
+    		<div class="section-title-bg">
+    			{{section_bg}}
+    		</div>
+
+    		<h2
+    			class="post-section-title"
+    			id="{{titleId}}"
+    		>
+    			{{section_title}}
+    		</h2>
+    	</div>
+
+    	<div class="categories-grid">
+
+    		{{categoriesContent}}
+
+    	</div>
+
+    </main>
 
 	<div id="footer-container"></div>
 	

@@ -48,15 +48,18 @@ const buildSearchIndex = require("./build-search-index");
 const ROOT = path.resolve(__dirname, "..");
 
 const {generateStatistics} = require("./stats");
-const {POSTS_JSON_PATH, PAGES_JSON_PATH, OUTPUT_DIR} = require("./config");
-
-const TRANSLATIONS_JSON_PATH = path.join(ROOT, "translations.json");
+const {
+	POSTS_JSON_PATH,
+	PAGES_JSON_PATH,
+	OUTPUT_DIR,
+	TRANSLATIONS_JSON_PATH,
+	SITEMAP_EXTRA_PATH
+} = require("./config");
 
 const POSTS_MD_DIR = path.join(ROOT, "posts");
 const ABOUT_MD_DIR = path.join(ROOT, "posts");
 
 const SITEMAP_PATH = path.join(ROOT, "sitemap.xml");
-const SITEMAP_EXTRA_PATH = path.join(ROOT, "sitemap-extra.json");
 
 const SITE_NAME = "Lastaj Neŭronoj";
 const SITE_URL = "https://lastajneuxronoj.github.io/";
@@ -547,7 +550,7 @@ async function buildStaticPages(pages, translations) {
 	return generated;
 }
 
-
+// Crea páginas de categorías
 async function buildCategoryPages(posts, translations) {
 
 	let generated = 0;
