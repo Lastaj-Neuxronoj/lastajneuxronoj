@@ -30,9 +30,9 @@ body.dark, html.dark {
 	align-items: center;
 	background-color: var(--base-color);
 	/* semitransparente */
-	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(10px);
-	/* soporte Safari */
+	backdrop-filter: blur(10px);
+		/* soporte Safari */
 	padding: 1rem 2rem;
 	border-bottom: 3px solid var(--primary-color);
 	width: 100%;
@@ -179,4 +179,158 @@ body.dark, html.dark {
 	transition: transform 0.3s ease;
 	height: 1.3rem;
 	width: auto;
+}
+
+/* Búsqueda */
+#search-switch {
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	background: none;
+	border: none;
+	cursor: pointer;
+
+	padding: 6px 6px;
+	background-color: var(--primary-color);
+	border-radius: 5px;
+
+	transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+#search-switch:hover {
+
+	transform: scale(1.1);
+
+	box-shadow:
+		0 3px 8px rgba(0,0,0,0.2);
+}
+
+#search-icon {
+	transition: transform 0.3s ease;
+	height: 1.3rem;
+	width: auto;
+}
+#search-icon {
+
+	height: 1.3rem;
+	width: auto;
+
+	transition:
+		transform 0.3s ease;
+}
+
+
+#search-switch:hover #search-icon {
+
+	transform:
+		rotate(-15deg)
+		scale(1.1);
+}
+/* BOTONES DEL HEADER */
+
+.header-button {
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 2rem;
+	background: var(--primary-color);
+	border: none;
+	cursor: pointer;
+
+	padding: 6px 6px;
+
+	border-radius: 5px;
+
+	transition:
+		transform 0.2s ease,
+		background-color 0.3s ease,
+		box-shadow 0.2s ease;
+}
+
+
+/* Hover común para todos los botones */
+
+.header-button:hover {
+
+	transform: scale(1.1);
+
+	background-color: var(--secondary-color);
+
+	box-shadow:
+		0 3px 8px rgba(0,0,0,0.2);
+}
+
+
+/* Selector de idioma */
+
+.lang-switch {
+
+	font-family: 'Hubot Sans', sans-serif;
+	font-weight: 600;
+
+	color: var(--background-color);
+
+	font-size: 1rem;
+
+	line-height: 1;
+
+}
+
+
+/* Íconos */
+
+#theme-icon,
+#search-icon {
+
+	height: 1.3rem;
+	width: auto;
+
+	transition:
+		transform 0.3s ease;
+}
+
+
+/* Rotación suave de íconos en hover */
+
+#theme-switch:hover #theme-icon {
+
+	transform:
+		rotate(15deg)
+		scale(1.05);
+}
+
+
+/* Animación propia de la lupa */
+
+#search-switch:hover #search-icon {
+
+	transform:
+		rotate(-15deg)
+		scale(1.1);
+}
+
+
+/* Animación de click de la búsqueda */
+
+#search-icon.search-click {
+
+	animation:
+		search-spin 0.4s ease;
+}
+
+
+@keyframes search-spin {
+
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
 }

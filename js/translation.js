@@ -63,6 +63,8 @@ function setLanguage(lang) {
 
 	localStorage.setItem("lang", lang);
 
+	document.documentElement.lang = lang;
+
 	window.dispatchEvent(
 		new CustomEvent("languageChanged", {
 			detail: { lang }
@@ -88,5 +90,6 @@ function setupLangToggle() {
 		await updateLanguageDependentLinks(true);
 
 		applyTranslations();
+
 	});
 }

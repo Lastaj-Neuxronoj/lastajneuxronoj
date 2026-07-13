@@ -1,6 +1,6 @@
 <header class="top-bar">
 		<div class="logo">
-			<a class="logo-svg-link" href="/index.html">
+			<a class="logo-svg-link" href="/index.html" title="logo">
 				<svg class="logo-svg">
 					<use href="/svg/logo.svg#logo"></use>
 				</svg>
@@ -11,8 +11,11 @@
 		<nav class="header-links" id="header-links">
 			<a id="header-home" href="/index.html">[ Ĉefpaĝo ]</a>
 			<a id="header-about" href="#">[ Pri mi ]</a>
-			<button class="lang-switch" id="lang-switch">[EO]</button>
-			<button class="theme-switch" id="theme-switch">
+			<button class="header-button lang-switch" id="lang-switch">[EO]</button>
+			<button class="header-button search-switch" id="search-switch" >
+				<img id="search-icon" src="/svg/search_w.svg" alt="Buscar" />
+			</button>
+			<button class="header-button theme-switch" id="theme-switch">
 				<img id="theme-icon" src="/svg/sun_w.svg" alt="Cambiar tema" />
 			</button>
 		</nav>
@@ -22,11 +25,30 @@
 			<img src="/svg/menu_b.svg" alt="Abrir menú" id="menu-icon">
 		</button>
 		<div id="lang-modal-overlay" class="lang-modal-overlay hidden">
-		<!--Muestra los idiomas disponibles-->
-		<div class="lang-modal">
-			<p id="lang-modal-message"></p>
-			<ul id="lang-modal-list" class="lang-modal-list"></ul>
-			<button id="lang-modal-close" class="lang-modal-close">✕</button>
+		<!--Muestra los idiomas disponibles del post o página-->
+			<div class="lang-modal">
+				<p id="lang-modal-message"></p>
+				<ul id="lang-modal-list" class="lang-modal-list"></ul>
+				<button id="lang-modal-close" class="lang-modal-close">✕</button>
+			</div>
 		</div>
-	</div>
+		<!-- Muestra un buscador y resultados-->
 </header>
+
+
+<div id="search-overlay" class="search-overlay hidden">
+
+	<div id="search-box" class="search-box">
+
+		<input
+			type="search"
+			id="search-input"
+			placeholder="Buscar..."
+			autocomplete="off"
+		>
+
+		<div id="search-results"></div>
+
+	</div>
+
+</div>

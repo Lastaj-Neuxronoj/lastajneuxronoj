@@ -1,6 +1,7 @@
 // Inicialización de la página
 document.addEventListener("DOMContentLoaded", async () => {
-	await loadHeader();
+	/*await getTranslations();*/
+    await loadHeader();
 	await loadFooter();
 
     if (document.getElementById("post-list")) {

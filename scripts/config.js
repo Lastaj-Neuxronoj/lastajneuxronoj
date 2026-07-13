@@ -35,6 +35,9 @@ module.exports = {
 	COVERS_DIR,
 	COVER_EXTENSIONS,
 
+	SEARCH_DIR:
+	path.join(ROOT, "search"),
+
 	POSTS_JSON_PATH:
 		path.join(ROOT, "posts.json"),
 

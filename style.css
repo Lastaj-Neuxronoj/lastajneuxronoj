@@ -309,8 +309,8 @@ main {
 }
 
 .post-emoji-badge img {
-	width: 36px;
-	height: 36px;
+	width: 36px !important;
+	height: 36px !important;
 }
 
 /* Caso 1: imagen + emoji → badge montado sobre el borde inferior */
@@ -398,6 +398,14 @@ main {
 }
 
 /* Emojis inline dentro del cuerpo de un post (Twemoji) */
+img.emoji {
+	display: inline-block;
+	vertical-align: -0.15em;
+	width: 1em;
+	height: 1em;
+	margin: 0;
+}
+
 .post-content img.emoji {
 	display: inline-block;
 	vertical-align: -0.15em;
@@ -627,6 +635,9 @@ tbody tr:hover {
 
 .lang-modal {
 	background: var(--background-color);
+	/*opacity: 0.8;
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);*/
 	color: var(--primary-color);
 	border: var(--border-width) solid var(--tertiary-color);
 	padding: var(--gap-lg);
@@ -818,6 +829,257 @@ tbody tr:hover {
 
 }
 
+/*Búsqueda (tootlip)*/
+/* Overlay */
+.search-overlay {
+
+	position: fixed;
+	inset: 0;
+
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+
+	padding-top: 10vh;
+
+	background: rgba(0, 0, 0, 0.15);
+
+	z-index: 2000;
+
+	opacity: 1;
+
+	transition:
+		opacity 0.2s ease;
+
+}
+
+.search-overlay.hidden {
+
+	opacity: 0;
+
+	pointer-events: none;
+
+}
+
+
+/* Ventana de búsqueda */
+.search-box {
+
+	width: min(700px, 90vw);
+
+	border: 2px solid var(--primary-color);
+	border-radius: 12px;
+
+	padding: 1rem;
+
+	box-shadow:
+		0 15px 40px rgba(0,0,0,0.25);
+
+	background-color: var(--base-color);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	
+
+	transform: translateY(0);
+
+	transition:
+		transform 0.2s ease;
+
+}
+
+.search-box .post-card {
+	opacity: 1;
+	transition: none !important;
+	animation: none !important;
+	width: 100%;
+	box-sizing: border-box;
+
+}
+
+.search-box .post-main {
+	display: flex;
+	overflow: hidden;
+	flex: 1;
+	min-width: 0;
+}
+
+
+#search-input {
+
+	box-sizing: border-box;
+
+}
+
+#search-input::-webkit-input-placeholder {
+	color: var(--primary-color);
+}
+
+#search-input::-moz-placeholder {
+	color: var(--primary-color);
+	opacity: 1;
+}
+
+#search-input::placeholder {
+	color: var(--primary-color);
+	opacity: 1;
+}
+
+
+
+/* Animación de apertura */
+.search-overlay.hidden .search-box {
+
+	transform: translateY(-20px);
+
+}
+
+
+/* Campo de búsqueda */
+#search-input {
+
+	width: 100%;
+
+	padding: 12px;
+
+	font-size: 1.1rem;
+
+	border: none;
+	outline: none;
+
+	background: transparent;
+
+	color: var(--primary-color);
+
+	font-family: inherit;
+
+}
+
+
+/* Resultados */
+#search-results {
+
+	margin-top: 1rem;
+
+	max-height: 50vh;
+
+	overflow-y: auto;
+
+}
+
+
+/* Tarjetas */
+.search-result {
+
+	display: block;
+
+	margin-bottom: 0.6rem;
+	background: none;
+	
+	box-sizing: border-box;
+}
+
+.search-result,
+.search-result:hover,
+.search-result:visited,
+.search-result:active {
+	text-decoration: none;
+	color: inherit;
+
+}
+
+
+.search-box .post-card {
+	height: auto;
+	min-height: unset;
+	width: 95%;
+	padding: 0.5rem 0.75rem;
+
+}
+
+
+.search-box .post-main {
+	height: auto;
+	min-height: unset;
+	align-items: center;
+
+}
+
+
+.search-box .post-content {
+
+	padding: 0;
+	min-width: 0;
+	overflow: hidden;
+
+}
+
+
+.search-box .post-number {
+
+	font-size: 1.4rem;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+}
+
+
+.search-box .post-title-index {
+
+	font-size: 1.4rem;
+
+	margin: 0;
+
+	line-height: 1.3;
+
+}
+
+
+/* Miniaturas más pequeñas */
+.search-box .post-card-media {
+
+	width: 80px;
+	height: 80px;
+
+	margin: 0;
+
+}
+
+
+.search-box .post-card-emoji {
+
+	width: 36px;
+	height: 36px;
+
+	right: 4px;
+	bottom: 4px;
+
+}
+
+
+.search-box .post-card-emoji img {
+
+	width: 20px;
+	height: 20px;
+
+}
+
+
+.search-box .post-card-emoji-only {
+
+	width: 42px;
+	height: 42px;
+
+}
+
+
+.search-box .post-card-emoji-only img {
+
+	width: 24px;
+	height: 24px;
+
+}
 
 
 

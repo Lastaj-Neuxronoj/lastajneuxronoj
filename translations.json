@@ -19,7 +19,8 @@
 					"memoirs": "Memorias",
 					"test": "Prueba"
 				}
-			}
+			},
+			"search": "Buscar..."
 		},
 		"posts": {
 			"label_bg": "POSTS",
@@ -56,7 +57,8 @@
 			"eo": "eo"
 		},
 		"errors": {
-			"onlyAvailableIn": "La siguiente entrada o página está disponible sólo en:"
+			"onlyAvailableIn": "La siguiente entrada o página está disponible sólo en:",
+			"noResults": "Sin resultados"
 		},
 		"callouts": {
     		"note": "Nota",
@@ -87,7 +89,8 @@
 					"memoirs": "Memoroj",
 					"test": "Prueba"
 				}
-			}
+			},
+			"search": "Serĉi..."
 		},
 		"posts": {
 			"label_bg": "POSTS",
@@ -124,7 +127,8 @@
 			"eo": "eo"
 		},
 		"errors": {
-			"onlyAvailableIn": "La sekva blogaĵo aŭ retpaĝo disponeblas nur en la jenaj lingvoj:"
+			"onlyAvailableIn": "La sekva blogaĵo aŭ retpaĝo disponeblas nur en la jenaj lingvoj:",
+			"noResults": "Neniuj rezultoj estis trovitaj"
 		},
 		"callouts": {
     		"note": "Noto",

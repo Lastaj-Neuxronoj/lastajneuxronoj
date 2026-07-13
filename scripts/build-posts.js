@@ -43,6 +43,7 @@ const { buildSitemap } = require("./build-sitemap");
 const buildRSS = require("./build-rss");
 const { LANGUAGE_NAMES } = require("./config");
 const findCoverImage = require("./utils/find-cover-image");
+const buildSearchIndex = require("./build-search-index");
 
 const ROOT = path.resolve(__dirname, "..");
 
@@ -540,6 +541,7 @@ async function buildStaticPages(pages, translations) {
 
 	for (const language of Object.keys(translations)) {
 		await buildRSS(language);
+		await buildSearchIndex(language);
 	}
 
 	return generated;

@@ -199,3 +199,23 @@ body>main {
 	grid-row: 2;
 	justify-self: center;
 }
+
+.search-box {
+
+		width: 95vw;
+
+}
+
+.search-box .post-card-media {
+	width: 56px;
+	height: 56px;
+}
+
+.search-box .post-number {
+	font-size: 1rem;
+	min-width: 40px;
+}
+
+.search-box .post-title-index {
+	font-size: 1rem;
+}

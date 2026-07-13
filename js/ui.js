@@ -49,9 +49,9 @@ async function initHeaderFeatures() {
 	setupTheme();
 	setupLangToggle();
 
-	await updateLanguageDependentLinks();
-
 	applyTranslations();
+	updateLanguageDependentLinks();
+	setupSearch();
 }
 
 let menuOpen = false;
@@ -112,6 +112,17 @@ function setupMenu() {
 }
 
 function setupTheme() {
+
+	const preloadIcons = [
+		"/svg/sun_w.svg",
+		"/svg/moon_b.svg"
+	];
+
+	preloadIcons.forEach(src => {
+		const img = new Image();
+		img.src = src;
+	});
+
 	const savedTheme = localStorage.getItem("theme");
 
 	const theme =
@@ -129,35 +140,21 @@ function setupTheme() {
 	const themeSwitch = document.getElementById("theme-switch");
 
 
-	function setIconSrc(theme, animate = false) {
+function setIconSrc(theme) {
 
-		if (!icon) return;
+	if (!icon) return;
 
-		const newSrc =
-			theme === "dark"
-				? "/svg/moon_b.svg"
-				: "/svg/sun_w.svg";
-
-
-		if (animate) {
-			icon.classList.add("icon-swapping");
-
-			setTimeout(() => {
-				icon.src = newSrc;
-				icon.classList.remove("icon-swapping");
-			}, 300);
-
-		} else {
-			icon.src = newSrc;
-		}
+	icon.src =
+		theme === "dark"
+			? "/svg/moon_b.svg"
+			: "/svg/sun_w.svg";
 
 
-		icon.alt =
-			theme === "dark"
-				? "Modo claro"
-				: "Modo oscuro";
-	}
-
+	icon.alt =
+		theme === "dark"
+			? "Modo claro"
+			: "Modo oscuro";
+}
 
 	function applyTheme(theme, animate = false) {
 
@@ -179,10 +176,18 @@ function setupTheme() {
 					: "/svg/left_arrow_b.svg";
 		}
 
+		const searchIcon = document.getElementById("search-icon");
+
+		if (searchIcon) {
+			searchIcon.src =
+				theme === "dark"
+					? "/svg/search_b.svg"
+					: "/svg/search_w.svg";
+		}
 
 		updateMenuIcon();
 
-		setIconSrc(theme, animate);
+		setIconSrc(theme);
 
 		updateHighlightTheme(theme);
 	}
@@ -247,9 +252,14 @@ function setupProgressBar() {
 async function updateLanguageDependentLinks(userInitiated = false) {
 	const lang = getCurrentLang();
 
-	document.documentElement.lang = lang;
-	localStorage.setItem("lang", lang);
-
+	document.dispatchEvent(
+		new CustomEvent("languageChanged", {
+			detail: {
+				lang: lang
+			}
+		})
+	);
+	
 	const links = {
 		"header-about": "about"
 	};
@@ -515,7 +525,7 @@ document.querySelectorAll(".copy-button").forEach((btn) => {
 function initializeTOC() {
 
 	const headings = document.querySelectorAll(
-		"h2[id], h3[id], h4[id]"
+		"h1[id], h2[id], h3[id], h4[id]"
 	);
 
 	const tocItems = document.querySelectorAll(
