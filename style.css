@@ -622,7 +622,7 @@ tbody tr:hover {
 .lang-modal-overlay {
 	position: fixed;
 	inset: 0;
-	background: rgba(0, 0, 0, 0.5);
+	background: rgba(0, 0, 0, 0.15);;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -634,12 +634,12 @@ tbody tr:hover {
 }
 
 .lang-modal {
-	background: var(--background-color);
-	/*opacity: 0.8;
+	background: var(--base-color) ;
 	-webkit-backdrop-filter: blur(10px);
-	backdrop-filter: blur(10px);*/
+	backdrop-filter: blur(10px);
+
 	color: var(--primary-color);
-	border: var(--border-width) solid var(--tertiary-color);
+	border: 2px solid var(--primary-color);
 	padding: var(--gap-lg);
 	border-radius: 8px;
 	max-width: 320px;
@@ -668,7 +668,7 @@ tbody tr:hover {
 	border-radius: 4px;
 	text-decoration: none;
 	color: var(--secondary-color);
-	background: var(--base-color);
+	background: var(--background-color);
 	overflow: hidden;
 	transition: background var(--transition-speed), color var(--transition-speed);
 }
@@ -868,7 +868,7 @@ tbody tr:hover {
 	width: min(700px, 90vw);
 
 	border: 2px solid var(--primary-color);
-	border-radius: 12px;
+	border-radius: 8px;
 
 	padding: 1rem;
 
