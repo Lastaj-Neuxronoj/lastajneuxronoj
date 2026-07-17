@@ -4,16 +4,19 @@
       "es": 1
     },
     "emoji": "🔠",
+    "color": "#3B88C3",
     "description": {
-      "es": "Sistema de escritura creado por Ronald Kingsley Read para el idioma inglés tras una competencia ideada por George Bernard Shaw.",
-      "eo": "Skribsistemo kreita de Ronald Kingsley Read por la angla post konkurso de George Bernard Shaw."
+      "es": "Sistema de escritura creado por Ronald Kingsley Read para el idioma inglés tras una competencia ideada por George Bernard Shaw, y luego adaptado para el esperanto.",
+      "eo": "Skribsistemo kreita de Ronald Kingsley Read por la angla post konkurso de George Bernard Shaw, kaj adaptita poste al Esperanto."
     }
   },
   "test": {
     "count": {
-      "eo": 2
+      "eo": 3,
+      "es": 1
     },
     "emoji": "🐞",
+    "color": "#E53935",
     "description": {
       "es": "Artículos para probar la interfaz y generador de Lastaj Neŭronoj, y asegurarse que no existen bugs.",
       "eo": "Artikoloj por provi la interfacon kaj generatoron de Lastaj Neŭronoj, kaj certigi, ke ne ekzistas cimoj."

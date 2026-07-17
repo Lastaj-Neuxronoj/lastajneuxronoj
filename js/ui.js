@@ -52,6 +52,7 @@ async function initHeaderFeatures() {
 	applyTranslations();
 	updateLanguageDependentLinks();
 	setupSearch();
+	buildCategoriesDropdown();
 }
 
 let menuOpen = false;
@@ -308,6 +309,7 @@ async function updateLanguageDependentLinks(userInitiated = false) {
 	}
 }
 
+// Muestra un modal para los idiomas disponibles
 async function showLangUnavailableError(availableLangs, buildLinkForLang) {
 	const translations = await getTranslations();
 	const currentLang = getCurrentLang();
@@ -379,26 +381,58 @@ async function showLangUnavailableError(availableLangs, buildLinkForLang) {
 		localStorage.setItem("lang", code);
 	});
 
-	li.appendChild(a);
-	list.appendChild(li);
-	});
+});
 
 	overlay.classList.remove("hidden");
-
+	
 	function close() {
 		overlay.classList.add("hidden");
-		closeBtn.removeEventListener("click", close);
-		overlay.removeEventListener("click", onOverlayClick);
+	
+		closeBtn.removeEventListener(
+			"click",
+			close
+		);
+	
+		overlay.removeEventListener(
+			"click",
+			onOverlayClick
+		);
+	
+		document.removeEventListener(
+			"keydown",
+			onKeyDown
+		);
 	}
-
+	
 	function onOverlayClick(e) {
-		if (e.target === overlay) close();
+		if (e.target === overlay) {
+			close();
+		}
 	}
-
-	closeBtn.addEventListener("click", close);
-	overlay.addEventListener("click", onOverlayClick);
+	
+	function onKeyDown(e) {
+		if (e.key === "Escape") {
+			close();
+		}
+	}
+	
+	closeBtn.addEventListener(
+		"click",
+		close
+	);
+	
+	overlay.addEventListener(
+		"click",
+		onOverlayClick
+	);
+	
+	document.addEventListener(
+		"keydown",
+		onKeyDown
+	);
 }
 
+// Muestra animación para <details>
 function setupDetailsAnimation() {
 	document.querySelectorAll("details").forEach((details) => {
 		const summary = details.querySelector("summary");
@@ -522,6 +556,7 @@ document.querySelectorAll(".copy-button").forEach((btn) => {
   });
 });
 
+//Incializa TOC
 function initializeTOC() {
 
 	const headings = document.querySelectorAll(
@@ -575,3 +610,130 @@ function initializeTOC() {
 	});
 
 }
+
+/* 	Ejecuta menú desplegable para categorías
+	Lee las categorías traducidas y las ordena por cantidad de artículos*/
+async function buildCategoriesDropdown() {
+
+	const menu =
+		document.getElementById(
+			"categories-dropdown"
+		);
+
+	if (!menu) {
+		return;
+	}
+
+	const lang =
+		getCurrentLang();
+
+	const translations =
+		await getTranslations();
+
+	const t =
+		translations[lang];
+
+	if (!t) {
+		return;
+	}
+
+	const response =
+		await fetch(
+			"/blog/categories/categories.json"
+		);
+
+	const categories =
+		await response.json();
+
+	menu.innerHTML = "";
+
+	const visibleCategories =
+		Object.entries(categories)
+
+			.map(
+				([slug, category]) => ({
+				
+					slug,
+				
+					...category,
+				
+					count:
+						category.count?.[lang]
+						|| 0
+				})
+			)
+
+			.filter(
+				category =>
+					category.count > 0
+			)
+
+			.sort(
+				(a, b) =>
+					b.count - a.count
+			);
+
+	for (
+		const category
+		of visibleCategories
+	) {
+
+		const name =
+			t.ui?.categories?.names?.[
+				category.slug
+			]
+			|| category.slug;
+
+		const link =
+			document.createElement(
+				"a"
+			);
+
+		link.className =
+			"dropdown-category";
+
+		const color =
+			category.color
+			|| "#888";
+				
+		link.style.setProperty(
+			"--category-color",
+			color
+		);
+
+		link.href =
+			`/blog/categories/${category.slug}.html`;
+
+		link.innerHTML = `
+			<span class="dropdown-category-name">
+				${category.emoji}
+				${name}
+			</span>
+
+			<span class="dropdown-category-count">
+				${category.count}
+			</span>
+		`;
+
+		menu.appendChild(
+			link
+		);
+	}
+
+	if (window.twemoji) {
+
+		twemoji.parse(
+			menu,
+			{
+				folder: "svg",
+				ext: ".svg"
+			}
+		);
+	}
+}
+
+
+window.addEventListener(
+	"languageChanged",
+	buildCategoriesDropdown
+);

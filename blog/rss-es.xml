@@ -9,9 +9,9 @@
             <link>https://lastajneuxronoj.github.io</link>
         </image>
         <generator>Lastaj Neŭronoj Static Generator</generator>
-        <lastBuildDate>Wed, 15 Jul 2026 05:03:52 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 16 Jul 2026 22:45:33 GMT</lastBuildDate>
         <atom:link href="https://lastajneuxronoj.github.io/rss-es.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 15 Jul 2026 05:03:52 GMT</pubDate>
+        <pubDate>Thu, 16 Jul 2026 22:45:33 GMT</pubDate>
         <copyright><![CDATA[Lastaj Neŭronoj]]></copyright>
         <language><![CDATA[es]]></language>
         <managingEditor><![CDATA[Tomás]]></managingEditor>
@@ -31,6 +31,7 @@
             <description><![CDATA[Descripción 0]]></description>
             <link>https://lastajneuxronoj.github.io/blog/000-es.html</link>
             <guid isPermaLink="false">https://lastajneuxronoj.github.io/blog/000-es.html</guid>
+            <category><![CDATA[Prueba]]></category>
             <pubDate>Sun, 13 Jul 2025 00:00:00 GMT</pubDate>
         </item>
     </channel>

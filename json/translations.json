@@ -14,7 +14,7 @@
 			},
 			"categories": {
 				"title": "CATEGORIES",
-				"subtitle": "Categorías",
+				"subtitle": "> Categorías",
 				"names": {
 					"science": "Ciencia",
 					"translation": "Traducción",
@@ -87,7 +87,7 @@
 			},
 			"categories": {
 				"title": "CATEGORIES",
-				"subtitle": "Kategorioj",
+				"subtitle": "> Kategorioj",
 				"names": {
 					"science": "Scienco",
 					"translation": "Traduko",

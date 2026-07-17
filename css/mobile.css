@@ -219,3 +219,11 @@ body>main {
 .search-box .post-title-index {
 	font-size: 1rem;
 }
+
+.categories-dropdown {
+	display: none !important;
+}
+
+#header-categories::after {
+	content: "";
+}

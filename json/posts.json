@@ -81,6 +81,7 @@
 			"es": "Prueba",
 			"eo": "Provo"
 		},
+		"category": "test",
 		"author_id": "tomas",
 		"author": {
 			"es": "",
