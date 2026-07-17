@@ -363,9 +363,9 @@ body.dark, html.dark {
 
 	display: none;
 
-	position: absolute;
+	position: fixed;
 
-	top: calc(100% + 30px);
+	top: 0;
 	left: 0;
 
 	min-width: 260px;
@@ -385,25 +385,7 @@ body.dark, html.dark {
 	-webkit-backdrop-filter: blur(10px);
 	backdrop-filter: blur(10px) !important;
 
-	z-index: 1000;
-}
-
-.header-dropdown::after {
-	content: "";
-
-	position: absolute;
-
-	left: 0;
-	top: 100%;
-
-	width: 100%;
-	height: 30px;
-}
-
-.header-dropdown:hover
-.categories-dropdown {
-
-	display: block;
+	z-index: 2000;
 }
 
 .dropdown-category {

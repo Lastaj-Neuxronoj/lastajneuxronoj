@@ -615,7 +615,7 @@ function initializeTOC() {
 	Lee las categorías traducidas y las ordena por cantidad de artículos*/
 async function buildCategoriesDropdown() {
 
-	const menu =
+	let menu =
 		document.getElementById(
 			"categories-dropdown"
 		);
@@ -652,11 +652,11 @@ async function buildCategoriesDropdown() {
 
 			.map(
 				([slug, category]) => ({
-				
+
 					slug,
-				
+
 					...category,
-				
+
 					count:
 						category.count?.[lang]
 						|| 0
@@ -695,7 +695,7 @@ async function buildCategoriesDropdown() {
 		const color =
 			category.color
 			|| "#888";
-				
+
 		link.style.setProperty(
 			"--category-color",
 			color
@@ -728,6 +728,103 @@ async function buildCategoriesDropdown() {
 				folder: "svg",
 				ext: ".svg"
 			}
+		);
+	}
+
+	/* -------------------------------- */
+	/* MOVER AL BODY (una sola vez)     */
+	/* -------------------------------- */
+
+	if (!menu.dataset.portal) {
+
+		document.body.appendChild(
+			menu
+		);
+
+		menu.dataset.portal =
+			"true";
+
+		const trigger =
+			document.querySelector(
+				".header-dropdown"
+			);
+
+		const positionMenu =
+			() => {
+
+				const rect =
+					trigger.getBoundingClientRect();
+
+				menu.style.left =
+					`${rect.left}px`;
+
+				menu.style.top =
+					`${rect.bottom + 30}px`;
+			};
+
+		positionMenu();
+
+		let closeTimeout;
+
+		trigger.addEventListener(
+			"mouseenter",
+			() => {
+			
+				clearTimeout(
+					closeTimeout
+				);
+			
+				positionMenu();
+			
+				menu.style.display =
+					"block";
+			}
+		);
+		
+		trigger.addEventListener(
+			"mouseleave",
+			() => {
+			
+				closeTimeout =
+					setTimeout(
+						() => {
+						
+							menu.style.display =
+								"none";
+						
+						},
+						150
+					);
+			}
+		);
+		
+		menu.addEventListener(
+			"mouseenter",
+			() => {
+			
+				clearTimeout(
+					closeTimeout
+				);
+			}
+		);
+		
+		menu.addEventListener(
+			"mouseleave",
+			() => {
+			
+				menu.style.display =
+					"none";
+			}
+		);
+
+		window.addEventListener(
+			"resize",
+			positionMenu
+		);
+
+		window.addEventListener(
+			"scroll",
+			positionMenu
 		);
 	}
 }
