@@ -12,7 +12,8 @@
 			"toc": {
 				"title": "Contenido",
 				"music": "Música",
-				"podcast": "Podcast"
+				"podcast": "Podcast",
+				"play": "Escuchar"
 			},
 			"categories": {
 				"title": "CATEGORIES",
@@ -87,7 +88,8 @@
 			"toc": {
 				"title": "Enhavo",
 				"music": "Muziko",
-				"podcast": "Podkastaĵo"
+				"podcast": "Podkastaĵo",
+				"play": "Aŭskulti"
 			},
 			"categories": {
 				"title": "CATEGORIES",

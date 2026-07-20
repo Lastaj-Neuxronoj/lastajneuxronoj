@@ -920,6 +920,57 @@ async function renderPage({ type, data }) {
 				emoji: data.post.emoji,
 			});
 
+			// Media sidebar
+			const listenLabel =
+				data.translations[data.lang]?.ui?.toc?.listen ||
+				"Escuchar";
+
+			const musicList =
+				(data.post.music || [])
+					.filter(item => item.url);
+
+			const podcastList =
+				(data.post.podcast || [])
+					.filter(item => item.url);
+					
+			const mediaMenu = `
+				<div class="media-sidebar">
+
+					${musicList.length ? `
+						<div class="media-section">
+					
+							<div class="media-title" data-type="music">
+								${data.translations[data.lang].ui.toc.music}
+							</div>
+					
+							${musicList.map(track => `
+								<a class="media-item" href="${track.url}" target="_blank" rel="noopener noreferrer" data-media-title="${track.title}" data-title="${listenLabel}: ${track.title}" ></a>
+							`).join("")}
+							
+						</div>
+					` : ""}
+							
+					${podcastList.length ? `
+						<div class="media-section" data-type="podcast">
+					
+							<div class="media-title">
+								${data.translations[data.lang].ui.toc.podcast}
+							</div>
+					
+							${podcastList.map(episode => `
+								<a class="media-item" href="${episode.url}" target="_blank" rel="noopener noreferrer" 	data-media-title="${episode.title}" data-title="${listenLabel}: ${episode.title}"></a>
+							`).join("")}
+							
+						</div>
+					` : ""}
+							
+				</div>
+			`;
+
+			const hasMedia =
+				musicList.length > 0 ||
+				podcastList.length > 0;
+
 			return renderTemplate(template, {
 				lang: data.lang,
 				title: buildPageTitle(data.post.title[data.lang]),
@@ -939,6 +990,7 @@ async function renderPage({ type, data }) {
 				titles: JSON.stringify(titles).replace(/"/g, "&quot;"),
 				...seo,
 				rssLink,
+				mediaMenu: hasMedia ? mediaMenu : "",
 			});
 		}
 
@@ -1016,17 +1068,13 @@ function estimateReadingTime(html) {
 		.replace(/\s+/g, " ")
 		.trim();
 
-
 	const countWords = text =>
 		text ? text.split(/\s+/).length : 0;
-
 
 	const normalWords = countWords(normalText);
 	const detailsWords = countWords(detailsText);
 
-
 	const wordsPerMinute = 200;
-
 
 	const normalTime = Math.ceil(normalWords / wordsPerMinute);
 	const detailsTime = Math.ceil(detailsWords / wordsPerMinute);
@@ -1089,6 +1137,7 @@ function processHeadings(html, lang, translations = {}, pageTitle = "") {
 		`<a href="#${item.id}" class="toc-item level-${item.level}" data-title="${item.text}" data-target="${item.id}"></a>`
 	).join("");
 
+	
 	const tocHtml = `<nav class="toc-sidebar" aria-label="${tocLabel}"><span class="toc-label">${tocLabel}</span>${tocItems}</nav>`;
 
 	if (toc.length > 0) {

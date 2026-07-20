@@ -227,3 +227,7 @@ body>main {
 #header-categories::after {
 	content: "";
 }
+
+.media-sidebar {
+	display: none;
+}

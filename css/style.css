@@ -1352,6 +1352,7 @@ tbody tr:hover {
 		opacity 0.15s ease,
 		transform 0.15s ease;
 	border: 1px solid transparent;
+	font-family: var(--font-ui);
 }
 
 
@@ -1384,10 +1385,165 @@ tbody tr:hover {
 }
 
 .toc-item:hover::before {
-
 	opacity: 1;
 
 }
+
+/* Menú multimedia (música y podcast) */
+
+.media-sidebar {
+
+	position: fixed;
+	
+	left: 2rem;
+	top: 80px;
+
+	z-index: 1000;
+
+}
+
+.media-title {
+
+	font-family: var(--font-ui);
+	font-size: 0.7rem;
+	font-weight: 600;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: var(--tertiary-color);
+	opacity: 0.7;
+
+}
+
+.media-section {
+	margin-bottom: 1rem;
+	margin-top: 1rem;
+}
+
+.media-item {
+
+	display: block;
+
+	height: 15px;
+	width: 80px;
+
+	position: relative;
+
+	text-decoration: none !important;
+	border-bottom: 0 !important;
+
+	transition:
+		transform 0.2s ease;
+
+}
+
+.media-item::after {
+
+	content: attr(data-title);
+
+	position: absolute;
+
+	left: calc(100% + 12px);
+	top: 50%;
+
+	padding: 0.4rem 0.7rem;
+
+	font-family: var(--font-ui);
+	font-size: 0.85rem !important;
+	text-decoration: none !important;
+	text-transform: none;            
+	letter-spacing: normal;          
+
+	border-radius: 8px;
+
+	background: var(--base-color-solid);
+	color: var(--text-color) !important;
+
+	white-space: nowrap;
+
+	opacity: 0;
+
+	pointer-events: none;
+
+	z-index: 1001;
+
+	transform:
+		translateY(-50%)
+		translateX(-5px);
+
+	transition:
+		opacity 0.15s ease,
+		transform 0.15s ease;
+
+	border: 1px solid transparent;
+}
+
+.media-item::before {
+
+	content: "";
+
+	position: absolute;
+
+	left: 0;
+	top: 50%;
+
+	width: 100%;
+	height: 3px;
+
+	background: var(--primary-color);
+
+	border-radius: 999px;
+
+	opacity: 0.5;
+
+	transform: translateY(-50%);
+
+	transition:
+		opacity 0.2s ease,
+		background 0.2s ease;
+
+}
+
+.media-item:hover {
+
+	transform: translateX(5px);
+
+}
+
+.media-item:hover::after {
+
+	opacity: 1;
+
+	border-color: var(--secondary-color);
+
+	transform:
+		translateY(-50%)
+		translateX(0);
+
+	box-shadow:
+		0 4px 12px rgba(0,0,0,0.15);
+
+}
+
+.media-item:hover::before {
+
+	opacity: 1;
+
+	background: var(--secondary-color);
+
+}
+
+.media-item,
+.media-item:link,
+.media-item:visited {
+
+	color: var(--text-color);
+
+	text-decoration: none !important;
+	border-bottom: 0 !important;
+
+}
+
+
 
 /* Menú desplegable */
 .header-dropdown {

@@ -64,7 +64,24 @@
 		"date": "2025-07-14",
 		"excerpt": {
 			"eo": "Ĉi tio estas prova artikolo en Esperanto. Maecenas in eleifend tortor. Fusce suscipit sapien ut euismod ultrices. Nam nec accumsan eros. Ut sed facilisis eros. Ut eget purus consequat nibh fermentum tempus ac sit amet neque. Proin vitae vulputate tellus. Nulla ac venenatis augue. Nam ac dolor nibh. Morbi at auctor ipsum, in tincidunt ipsum. "
-		}
+		},
+		"music": [
+			{
+				"url":	"https://youtu.be/XfELJU1mRMg?si=4FB3dupB30hP_lah",
+				"title": "Never Gonna Give You Up"
+			},
+			{
+				"url":	"https://youtu.be/XfELJU1mRMg?si=4FB3dupB30hP_lah",
+				"title": "Never Gonna Give You Up"
+			}
+		],
+
+		"podcast": [
+			{
+				"title": "",
+				"url": ""
+			}
+		]
 	},
 	{
 		"number": "000",

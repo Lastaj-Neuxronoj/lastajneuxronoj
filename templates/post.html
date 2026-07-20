@@ -88,7 +88,7 @@
         async src="//gc.zgo.at/count.js"></script>-->
 	</head>
 
-	<body data-page="post" data-number="{{number}}" data-available-langs="{{availableLangs}}" data-titles="{{titles}}">
+	<body data-page="post" data-number="{{number}}" data-available-langs="{{availableLangs}}" data-music="{{music}}"	data-podcast="{{podcast}}" data-titles="{{titles}}">
 		<div id="header-container"></div>
 
 		<!-- Barra de progreso -->
@@ -117,9 +117,7 @@
 						| {{readingTime}} {{readingLabel}}
 					</span>
 				</div>
-
-				
-
+					{{mediaMenu}}			
 				<hr class="rect-line" />
 	        	<div class="post-content">{{body}}</div>
 				{{postFooterNav}}

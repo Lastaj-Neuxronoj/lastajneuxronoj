@@ -609,6 +609,22 @@ function initializeTOC() {
 		observer.observe(heading);
 	});
 
+	const mediaSidebar =
+		document.querySelector(".media-sidebar");
+
+	const tocSidebar =
+		document.querySelector(".toc-sidebar");
+
+	if (mediaSidebar && tocSidebar) {
+
+		const mediaHeight =
+			mediaSidebar.offsetHeight;
+
+		tocSidebar.style.top =
+			`${150 + mediaHeight + 5}px`;
+
+	}
+
 }
 
 /* 	Ejecuta menú desplegable para categorías

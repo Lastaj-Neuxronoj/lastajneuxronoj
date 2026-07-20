@@ -43,6 +43,28 @@ async function applyTranslations() {
 		}
 	};
 
+	const tocLabel = document.querySelector(".toc-label");
+
+	if (tocLabel) {
+		tocLabel.textContent = t.ui.toc.title;
+	}
+
+	const musicLabel = document.querySelector(
+		'.media-title[data-type="music"]'
+	);
+
+	if (musicLabel) {
+		musicLabel.textContent = t.ui.toc.music;
+	}
+
+	const podcastLabel = document.querySelector(
+		'.media-title[data-type="podcast"]'
+	);
+	
+	if (podcastLabel) {
+		podcastLabel.textContent = t.ui.toc.podcast;
+	}
+
 	applyText("logo-text", t.header.logo_text);
 	applyText("header-home", t.header.header_home);
 	applyText("header-about", t.header.header_about);
@@ -55,6 +77,20 @@ async function applyTranslations() {
 
 	applyText("back-to-home", t.backToHome);
 	applyText("footer-text", t.footer_text);
+
+	document
+	.querySelectorAll(".media-item")
+	.forEach(el => {
+
+		const mediaTitle =
+			el.dataset.mediaTitle;
+
+		if (!mediaTitle) return;
+
+		el.dataset.title =
+			`${t.ui.toc.play}: ${mediaTitle}`;
+
+	});
 }
 
 
