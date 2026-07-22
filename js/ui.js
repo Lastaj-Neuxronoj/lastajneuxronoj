@@ -219,23 +219,34 @@ function setIconSrc(theme) {
 
 // ---------- BARRA DE PROGRESO ----------
 function setupProgressBar() {
-	const progressBar = document.getElementById("progress-bar");
-	if (!progressBar) return;
+
+	const progressBar =
+		document.getElementById("progress-bar");
+
+	const progressContainer =
+		document.querySelector(".progress-bar-container");
+
+	if (!progressBar || !progressContainer) return;
 
 	function updateProgress() {
-		const scrollTop = window.scrollY;
-		const docHeight = document.documentElement.scrollHeight - window.innerHeight;
 
-		// Evita división por cero en páginas cortas
+		const scrollTop = window.scrollY;
+
+		const docHeight =
+			document.documentElement.scrollHeight -
+			window.innerHeight;
+
 		if (docHeight <= 0) {
 			progressBar.style.width = "100%";
 			progressBar.classList.add("complete");
 			return;
 		}
 
-		const scrollPercent = (scrollTop / docHeight) * 100;
+		const scrollPercent =
+			(scrollTop / docHeight) * 100;
 
-		progressBar.style.width = `${scrollPercent}%`;
+		progressBar.style.width =
+			`${scrollPercent}%`;
 
 		if (scrollPercent >= 85) {
 			progressBar.classList.add("complete");
@@ -244,10 +255,37 @@ function setupProgressBar() {
 		}
 	}
 
-	window.addEventListener("scroll", updateProgress);
+	function updatePosition() {
 
-	// Ejecutar una vez al cargar
+		const header =
+			document.querySelector(".top-bar");
+
+		if (!header) return;
+
+		progressContainer.style.top =
+			`${header.offsetHeight - 4}px`;
+	}
+
+	window.addEventListener(
+		"scroll",
+		updateProgress
+	);
+
+	window.addEventListener(
+		"resize",
+		updatePosition
+	);
+
+	const header =
+	document.querySelector(".top-bar");
+
+const observer =
+	new ResizeObserver(updatePosition);
+
+observer.observe(header);
+
 	updateProgress();
+	updatePosition();
 }
 
 async function updateLanguageDependentLinks(userInitiated = false) {
@@ -556,7 +594,7 @@ document.querySelectorAll(".copy-button").forEach((btn) => {
   });
 });
 
-//Incializa TOC
+//Incializa TOC y media sidebar
 function initializeTOC() {
 
 	const headings = document.querySelectorAll(

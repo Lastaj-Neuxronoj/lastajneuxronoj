@@ -31,6 +31,20 @@
 
 function preprocessCallouts(md, translations) {
 
+md = md.replace(
+	/^:::tokipona\s*\n([\s\S]*?)\n:::/gm,
+	(_, content) => {
+
+		return `
+<div class="sitelen-pona-block">
+
+${content.trim()}
+
+</div>
+`;
+	}
+);
+
 	const calloutTypes = [
 		"note",
 		"warning",

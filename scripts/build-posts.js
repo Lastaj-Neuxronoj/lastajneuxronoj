@@ -94,6 +94,16 @@ function parseAttributes(attrs = "") {
 	};
 }
 
+function preprocessTokiPonaInline(markdown) {
+	return markdown.replace(
+		/\{\{tp:([^}]*)\}\}/g,
+		(_, text) =>
+			`<span class="sitelen-pona">${text.trim()}</span>`
+	);
+}
+
+
+//Procesa referencias
 function preprocessReferences(markdown) {
 	let equationNumber = 0;
 	let figureNumber = 0;
@@ -513,6 +523,8 @@ async function buildStaticPages(pages, translations) {
 // RENDER SYSTEM
 // =========================
 
+
+
 // Devuelve solo el <img> del emoji del cover (o "" si no hay)
 function renderEmojiImg(emoji) {
 	if (!emoji) return "";
@@ -534,8 +546,12 @@ function renderMarkdownContent(md, lang, translations, pageTitle = "") {
 		referenceMap
 	} = preprocessReferences(processedMarkdown);
 
+	// Toki pona (inline)
+	const markdownWithTokiPona =
+		preprocessTokiPonaInline(markdown);
+
 	// Markdown → HTML
-	let html = marked.parse(markdown);
+	let html = marked.parse(markdownWithTokiPona);
 
 	// Renderizar KaTeX y bloques con referencias
 	html = renderReferences(
