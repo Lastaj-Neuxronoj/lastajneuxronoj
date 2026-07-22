@@ -1,0 +1,59 @@
+{
+	"tradukoj": {
+		"title": {
+			"es": "Traducciones",
+			"eo": "Tradukoj"
+		},
+		"emoji": "🌎",
+		"color": "#5C913C",
+		"children": {
+			"libroj": {
+				"title": {
+					"es": "Libros",
+					"eo": "Libroj"
+				},
+				"emoji": "📚",
+				"color": "#F4900C",
+				"url": "/projects/tradukoj/libroj.html"
+			},
+			"filmoj": {
+				"title": {
+					"es": "Películas",
+					"eo": "Filmoj"
+				},
+				"emoji": "🎬",
+				"color": "#3F7123",
+				"url": "/projects/tradukoj/filmoj.html"
+			}
+		}
+	},
+
+	"sava": {
+		"title": {
+			"es": "Shaviano",
+			"eo": "Ŝava"
+		},
+		"emoji": "🔤",
+		"color": "#3B88C3",
+		"children": {
+			"klavarfasono": {
+				"title": {
+					"es": "Distribución de teclado",
+					"eo": "Klavarfasono"
+				},
+				"emoji": "⌨️",
+				"color": "#99AAB5",
+				"url": "/projects/sava/klavarfasono.html"
+			},
+			"transliterumilo": {
+				"title": {
+					"es": "Transliterador",
+					"eo": "Transliterumilo"
+				},
+				"emoji": "🔤",
+				"color": "#3B88C3",
+				"url": "/projects/sava/transliterumilo.html"
+			}
+		}
+	}
+}

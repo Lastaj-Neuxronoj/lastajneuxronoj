@@ -69,7 +69,7 @@ async function applyTranslations() {
 	applyText("header-home", t.header.header_home);
 	applyText("header-about", t.header.header_about);
 	applyText("header-categories", t.header.header_categories);
-	applyText("header-proyects", t.header.header_proyects);
+	applyText("header-projects", t.header.header_projects);
 	applyText("lang-switch", t.header.lang_code);
 
 	applyText("posts-label-bg", t.posts.label_bg);

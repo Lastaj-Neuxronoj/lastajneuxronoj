@@ -5,7 +5,7 @@
 			"header_home": "[ Inicio ]",
 			"header_about": "[ Sobre mí ]",
 			"header_categories": "[ Categorías ]",
-			"header_proyects": "[ Proyectos ]",
+			"header_projects": "[ Proyectos ]",
 			"lang_code": "[ES]"
 		},
 		"ui": {
@@ -81,7 +81,7 @@
 			"header_home": "[ Ĉefpaĝo ]",
 			"header_about": "[ Pri mi ]",
 			"header_categories": "[ Kategorioj ]",
-			"header_proyects": "[ Projektoj ]",
+			"header_projects": "[ Projektoj ]",
 			"lang_code": "[EO]"
 		},
 		"ui": {

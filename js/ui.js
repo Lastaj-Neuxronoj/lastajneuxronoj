@@ -52,7 +52,19 @@ async function initHeaderFeatures() {
 	applyTranslations();
 	updateLanguageDependentLinks();
 	setupSearch();
-	buildCategoriesDropdown();
+	await buildCategoriesDropdown();
+	await buildProjectsDropdown();
+	setupDropdown(
+	"header-categories",
+	"categories-dropdown"
+);
+
+
+setupDropdown(
+	"header-projects",
+	"projects-dropdown"
+);
+
 }
 
 let menuOpen = false;
@@ -665,14 +677,20 @@ function initializeTOC() {
 
 }
 
-/* 	Ejecuta menú desplegable para categorías
-	Lee las categorías traducidas y las ordena por cantidad de artículos*/
-async function buildCategoriesDropdown() {
+//Menú desplegable genérico
+async function buildDropdown({
+	elementId,
+	url,
+	render
+}) {
 
-	let menu =
-		document.getElementById(
-			"categories-dropdown"
-		);
+	console.log(
+		"Construyendo dropdown:",
+		elementId
+	);
+
+	const menu =
+		document.getElementById(elementId);
 
 	if (!menu) {
 		return;
@@ -684,95 +702,18 @@ async function buildCategoriesDropdown() {
 	const translations =
 		await getTranslations();
 
-	const t =
-		translations[lang];
-
-	if (!t) {
-		return;
-	}
-
 	const response =
-		await fetch(
-			"/blog/categories/categories.json"
-		);
+		await fetch(url);
 
-	const categories =
+	const data =
 		await response.json();
 
-	menu.innerHTML = "";
-
-	const visibleCategories =
-		Object.entries(categories)
-
-			.map(
-				([slug, category]) => ({
-
-					slug,
-
-					...category,
-
-					count:
-						category.count?.[lang]
-						|| 0
-				})
-			)
-
-			.filter(
-				category =>
-					category.count > 0
-			)
-
-			.sort(
-				(a, b) =>
-					b.count - a.count
-			);
-
-	for (
-		const category
-		of visibleCategories
-	) {
-
-		const name =
-			t.ui?.categories?.names?.[
-				category.slug
-			]
-			|| category.slug;
-
-		const link =
-			document.createElement(
-				"a"
-			);
-
-		link.className =
-			"dropdown-category";
-
-		const color =
-			category.color
-			|| "#888";
-
-		link.style.setProperty(
-			"--category-color",
-			color
+	menu.innerHTML =
+		render(
+			data,
+			lang,
+			translations
 		);
-
-		link.href =
-			`/blog/categories/${category.slug}.html`;
-
-		link.innerHTML = `
-			<span class="dropdown-category-name">
-				${category.emoji}
-				${name}
-			</span>
-
-			<span class="dropdown-category-count">
-				${category.count}
-			</span>
-		`;
-
-		menu.appendChild(
-			link
-		);
-	}
 
 	if (window.twemoji) {
 
@@ -783,108 +724,265 @@ async function buildCategoriesDropdown() {
 				ext: ".svg"
 			}
 		);
-	}
 
-	/* -------------------------------- */
-	/* MOVER AL BODY (una sola vez)     */
-	/* -------------------------------- */
-
-	if (!menu.dataset.portal) {
-
-		document.body.appendChild(
-			menu
-		);
-
-		menu.dataset.portal =
-			"true";
-
-		const trigger =
-			document.querySelector(
-				".header-dropdown"
-			);
-
-		const positionMenu =
-			() => {
-
-				const rect =
-					trigger.getBoundingClientRect();
-
-				menu.style.left =
-					`${rect.left}px`;
-
-				menu.style.top =
-					`${rect.bottom + 30}px`;
-			};
-
-		positionMenu();
-
-		let closeTimeout;
-
-		trigger.addEventListener(
-			"mouseenter",
-			() => {
-			
-				clearTimeout(
-					closeTimeout
-				);
-			
-				positionMenu();
-			
-				menu.style.display =
-					"block";
-			}
-		);
-		
-		trigger.addEventListener(
-			"mouseleave",
-			() => {
-			
-				closeTimeout =
-					setTimeout(
-						() => {
-						
-							menu.style.display =
-								"none";
-						
-						},
-						150
-					);
-			}
-		);
-		
-		menu.addEventListener(
-			"mouseenter",
-			() => {
-			
-				clearTimeout(
-					closeTimeout
-				);
-			}
-		);
-		
-		menu.addEventListener(
-			"mouseleave",
-			() => {
-			
-				menu.style.display =
-					"none";
-			}
-		);
-
-		window.addEventListener(
-			"resize",
-			positionMenu
-		);
-
-		window.addEventListener(
-			"scroll",
-			positionMenu
-		);
 	}
 }
 
 
+/* 	Ejecuta menú desplegable para categorías
+	Lee las categorías traducidas y las ordena por cantidad de artículos*/
+async function buildCategoriesDropdown() {
+
+	await buildDropdown({
+
+		elementId: "categories-dropdown",	
+		url:"/blog/categories/categories.json",
+
+		render: renderCategoriesDropdown
+	});
+
+}
+
+function renderCategoriesDropdown(categories, lang, translations) {
+
+	const t = translations[lang];
+
+	return Object.entries(categories)
+
+	.map(([slug, category]) => {
+
+		const name =
+			t.ui?.categories?.names?.[slug]
+			|| slug;
+
+
+		const count =
+			category.count?.[lang]
+			|| 0;
+
+
+		if (count === 0) {
+			return "";
+		}
+
+
+		return `
+		<a
+			class="dropdown-category"
+			href="/blog/categories/${slug}.html"
+			style="--category-color:${category.color || "#888"}"
+		>
+
+			<span class="dropdown-category-name">
+				${category.emoji}
+				${name}
+			</span>
+
+			<span class="dropdown-category-count">
+				${count}
+			</span>
+
+		</a>
+		`;
+
+	})
+
+	.join("");
+
+}
+
+async function buildProjectsDropdown() {
+
+	await buildDropdown({
+
+		elementId:
+			"projects-dropdown",
+
+		url:
+			"/json/projects.json",
+
+		render:
+			renderProjectsDropdown
+
+	});
+
+}
+
+function renderProjectsDropdown(
+	projects,
+	lang
+) {
+
+	return renderProjectTree(
+		projects,
+		lang
+	);
+
+
+	function renderProjectTree(items, lang) {
+
+	return Object.entries(items)
+
+		.map(
+			([slug, item]) => {
+
+				const title =
+					item.title?.[lang]
+					|| item.title?.es
+					|| slug;
+
+				const emoji =
+					item.emoji
+					|| "";
+
+
+			// Carpeta con hijos
+			if (item.children) {
+			
+				return `
+				<div class="project-folder">
+			
+					<div
+						class="project-folder-title"
+						style="--project-color:${item.color || "#888"}"
+					>
+			
+						<span>
+							${emoji}
+							${title}
+						</span>
+			
+						<span class="folder-arrow">
+							›
+						</span>
+			
+					</div>
+			
+			
+					<div class="project-submenu">
+			
+						${renderProjectTree(
+							item.children,
+							lang
+						)}
+					
+					</div>
+					
+				</div>
+				`;
+			}
+
+
+				// Proyecto final
+				return `
+				<a
+					class="project-link"
+					href="${item.url}"
+					style="--project-color:${item.color || "#888"}"
+				>
+					${emoji}
+					${title}
+				</a>
+				`;
+
+			}
+		)
+
+		.join("");
+
+}
+}
+
+function setupDropdown(
+	buttonId,
+	dropdownId
+) {
+
+	const button =
+		document.getElementById(buttonId);
+
+	const dropdown =
+		document.getElementById(dropdownId);
+
+
+	if (!button || !dropdown) {
+		return;
+	}
+
+
+	let timeout;
+
+
+	function showDropdown() {
+
+		clearTimeout(timeout);
+
+
+		const rect =
+			button.getBoundingClientRect();
+
+
+		dropdown.style.left =
+			`${rect.left}px`;
+
+		// dropdown.style.top =
+		// 	`${rect.bottom + 10}px`;
+
+
+		dropdown.classList.remove("dropdown-hidden");
+
+	}
+
+
+	function hideDropdown() {
+
+		timeout =
+			setTimeout(
+				() => {
+
+					dropdown.classList.add("dropdown-hidden");
+
+				},
+				200
+			);
+
+	}
+
+
+	button.addEventListener(
+		"mouseenter",
+		showDropdown
+	);
+
+
+	dropdown.addEventListener(
+		"mouseenter",
+		showDropdown
+	);
+
+
+	button.addEventListener(
+		"mouseleave",
+		hideDropdown
+	);
+
+
+	dropdown.addEventListener(
+		"mouseleave",
+		hideDropdown
+	);
+
+}
+
 window.addEventListener(
 	"languageChanged",
-	buildCategoriesDropdown
+	async () => {
+
+		await buildCategoriesDropdown();
+
+		await buildProjectsDropdown();
+
+	}
 );
+
+
